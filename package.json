@@ -3,10 +3,10 @@
     "version": "0.0.0",
     "description": "A open source API library for pterodactyl",
     "main": "dist/index.js",
-    "repository": "",
-    "author": "",
+    "repository": "https://github.com/Code-Sorcerers/Typeactyl.git",
+    "author": "Code-sorcerers <https://github.com/Code-Sorcerers>",
     "private": false,
-    "license": "MIT",
+    "license": "GPL-3.0",
     "files": [
         "dist",
         "LICENSE",
