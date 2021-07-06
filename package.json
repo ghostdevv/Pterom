@@ -1,0 +1,58 @@
+{
+    "name": "typeactyl",
+    "version": "0.0.0",
+    "description": "A open source API library for pterodactyl",
+    "main": "dist/index.js",
+    "repository": "",
+    "author": "",
+    "private": false,
+    "license": "MIT",
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.MD",
+        "CHANGELOG.MD",
+        ".gitignore"
+    ],
+    "scripts": {
+        "test": "node dist/tests/app.test.js && node dist/tests/client.test.js",
+        "build": "rimraf dist && tsc",
+        "lint:check": "eslint . --ext .ts",
+        "lint": "npm run lint:check -- --fix",
+        "_format": "prettier **/**/**/*.{ts,json,md}",
+        "format": "npm run _format -- --write",
+        "format:check": "npm run _format -- --list-different"
+    },
+    "lint-staged": {
+        "*.ts": [
+            "eslint --fix"
+        ],
+        "*.{ts,json,md}": [
+            "prettier --write"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged -v"
+        }
+    },
+    "devDependencies": {
+        "@types/jest": "^26.0.23",
+        "@types/node": "^15.14.0",
+        "@typescript-eslint/eslint-plugin": "^4.28.1",
+        "@typescript-eslint/parser": "^4.28.1",
+        "eslint": "^7.30.0",
+        "eslint-config-prettier": "^8.3.0",
+        "husky": "^7.0.0",
+        "jest": "^27.0.6",
+        "lint-staged": "^11.0.0",
+        "prettier": "^2.3.2",
+        "rimraf": "^3.0.2",
+        "ts-jest": "^27.0.3",
+        "typedoc": "^0.21.2",
+        "typescript": "^4.3.5"
+    },
+    "dependencies": {
+        "axios": "^0.21.1"
+    }
+}
