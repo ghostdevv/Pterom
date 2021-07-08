@@ -3,7 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteSchedule = exports.updateSchedule = exports.scheduleDetails = exports.createSchedule = exports.listSchedules = exports.uploadFile = exports.createFolder = exports.deleteFile = exports.decompressFile = exports.compressFile = exports.writeFile = exports.copyFile = exports.renameFile = exports.downloadFile = exports.getFileContent = exports.listFiles = exports.deleteDatabase = exports.rotateDatabasePassword = exports.createDatabase = exports.listDatabases = exports.changePowerState = exports.sendCommand = exports.resourceUsage = exports.serverDetails = exports.deleteApiKey = exports.createApikey = exports.listApiKeys = exports.updatePassword = exports.updateEmail = exports.disableTwoFactor = exports.enableTwoFactor = exports.genaratetwoFactorQR = exports.accountDetails = exports.showPermissions = exports.listServers = void 0;
+exports.createBackup = exports.listBackups = exports.deleteUser = exports.updateUser = exports.userDetails = exports.createUser = exports.listUsers = exports.unassignAllocation = exports.setPrimaryAllocation = exports.setAllocationNote = exports.assignAllocation = exports.listAllocations = exports.deleteTask = exports.updateTask = exports.createTask = exports.deleteSchedule = exports.updateSchedule = exports.scheduleDetails = exports.createSchedule = exports.listSchedules = exports.uploadFile = exports.createFolder = exports.deleteFile = exports.decompressFile = exports.compressFile = exports.writeFile = exports.copyFile = exports.renameFile = exports.downloadFile = exports.getFileContent = exports.listFiles = exports.deleteDatabase = exports.rotateDatabasePassword = exports.createDatabase = exports.listDatabases = exports.changePowerState = exports.sendCommand = exports.resourceUsage = exports.serverDetails = exports.deleteApiKey = exports.createApikey = exports.listApiKeys = exports.updatePassword = exports.updateEmail = exports.disableTwoFactor = exports.enableTwoFactor = exports.genaratetwoFactorQR = exports.accountDetails = exports.showPermissions = exports.listServers = void 0;
+exports.updateVariable = exports.listVariables = exports.deleteBackup = exports.downloadBackup = exports.backupDetails = void 0;
 const axiosRequest_1 = __importDefault(require("../utils/axiosRequest"));
 const utility_1 = require("../utils/utility");
 const listServers = (host, key) => {
@@ -227,3 +228,120 @@ const deleteSchedule = (host, key, serverId, scheduleId) => {
     return axios.request('DELETE', `api/client/servers/${serverId}/schedules/${scheduleId}`, null);
 };
 exports.deleteSchedule = deleteSchedule;
+const createTask = (host, key, serverId, scheduleId, action, payload, timeOffSet) => {
+    const axios = new axiosRequest_1.default(host, key);
+    const data = {
+        action: action,
+        payload: payload,
+        time_offset: timeOffSet,
+    };
+    return axios.request('POST', `api/client/servers/${serverId}/schedules/${scheduleId}/tasks`, `${data}`);
+};
+exports.createTask = createTask;
+const updateTask = (host, key, serverId, taskId, scheduleId, action, payload, timeOffSet) => {
+    const axios = new axiosRequest_1.default(host, key);
+    const data = {
+        action: action,
+        payload: payload,
+        time_offset: timeOffSet,
+    };
+    return axios.request('POST', `api/client/servers/${serverId}/schedules/${scheduleId}/tasks/${taskId}`, `${data}`);
+};
+exports.updateTask = updateTask;
+const deleteTask = (host, key, serverId, scheduleId, taskId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('DELETE', `api/client/servers/${serverId}/schedules/${scheduleId}/tasks/${taskId}`, null);
+};
+exports.deleteTask = deleteTask;
+const listAllocations = (host, key, serverId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('GET', `api/client/servers/${serverId}/network/allocations`, null);
+};
+exports.listAllocations = listAllocations;
+const assignAllocation = (host, key, serverId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('POST', `api/client/servers/${serverId}/network/allocations`, null);
+};
+exports.assignAllocation = assignAllocation;
+const setAllocationNote = (host, key, serverId, allocationId, notes) => {
+    const axios = new axiosRequest_1.default(host, key);
+    const data = { notes: notes };
+    return axios.request('POST', `api/client/servers/${serverId}/network/allocations/${allocationId}`, `${data}`);
+};
+exports.setAllocationNote = setAllocationNote;
+const setPrimaryAllocation = (host, key, serverId, allocationId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('POST', `api/client/servers/${serverId}/network/allocations/${allocationId}/primary`, null);
+};
+exports.setPrimaryAllocation = setPrimaryAllocation;
+const unassignAllocation = (host, key, serverId, allocationId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('DELETE', `api/client/servers/${serverId}/network/allocations/${allocationId}`, null);
+};
+exports.unassignAllocation = unassignAllocation;
+const listUsers = (host, key, serverId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('GET', `api/client/servers/${serverId}/users`, null);
+};
+exports.listUsers = listUsers;
+const createUser = (host, key, serverId, email, permissions) => {
+    const axios = new axiosRequest_1.default(host, key);
+    const data = {
+        email: email,
+        permissions: permissions,
+    };
+    return axios.request('POST', `api/client/servers/${serverId}/users`, `${data}`);
+};
+exports.createUser = createUser;
+const userDetails = (host, key, serverId, userId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('GET', `api/client/servers/${serverId}/users/${userId}`, null);
+};
+exports.userDetails = userDetails;
+const updateUser = (host, key, serverId, userId, permissions) => {
+    const axios = new axiosRequest_1.default(host, key);
+    const data = { permissions: permissions };
+    return axios.request('POST', `api/client/servers/${serverId}/users/${userId}`, `${data}`);
+};
+exports.updateUser = updateUser;
+const deleteUser = (host, key, serverId, userId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('DELETE', `api/client/servers/${serverId}/users/${userId}`, null);
+};
+exports.deleteUser = deleteUser;
+const listBackups = (host, key, serverId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('GET', `api/client/servers/${serverId}/backups`, null);
+};
+exports.listBackups = listBackups;
+const createBackup = (host, key, serverId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('POST', `api/client/servers/${serverId}/backups`, null);
+};
+exports.createBackup = createBackup;
+const backupDetails = (host, key, serverId, backupId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('GET', `api/client/servers/${serverId}/backups/${backupId}`, null);
+};
+exports.backupDetails = backupDetails;
+const downloadBackup = (host, key, serverId, backupId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('GET', `api/client/servers/${serverId}/backups/${backupId}/download`, null);
+};
+exports.downloadBackup = downloadBackup;
+const deleteBackup = (host, key, serverId, backupId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('DELETE', `api/client/servers/${serverId}/backups/${backupId}`, null);
+};
+exports.deleteBackup = deleteBackup;
+const listVariables = (host, key, serverId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('GET', `api/client/servers/${serverId}/startup`, null);
+};
+exports.listVariables = listVariables;
+const updateVariable = (host, key, serverId, key2, value) => {
+    const axios = new axiosRequest_1.default(host, key);
+    const data = { key: key2, value: value };
+    return axios.request('PUT', `api/client/servers/${serverId}/startup/variable`, `${data}`);
+};
+exports.updateVariable = updateVariable;
