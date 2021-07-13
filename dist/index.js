@@ -1,10 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-class Pterom {
-    constructor(mode, host, key) {
-        this.hostUrl = host;
-        this.apiKey = key;
-        this.packMode = mode;
+const client_1 = __importDefault(require("./client"));
+class Ptero {
+    constructor(host, key) {
+        this.client = new client_1.default(host, key);
+        this.app = new App(host, key);
     }
 }
-exports.default = Pterom;
+exports.default = Ptero;

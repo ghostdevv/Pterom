@@ -3,10 +3,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createBackup = exports.listBackups = exports.deleteUser = exports.updateUser = exports.userDetails = exports.createUser = exports.listUsers = exports.unassignAllocation = exports.setPrimaryAllocation = exports.setAllocationNote = exports.assignAllocation = exports.listAllocations = exports.deleteTask = exports.updateTask = exports.createTask = exports.deleteSchedule = exports.updateSchedule = exports.scheduleDetails = exports.createSchedule = exports.listSchedules = exports.uploadFile = exports.createFolder = exports.deleteFile = exports.decompressFile = exports.compressFile = exports.writeFile = exports.copyFile = exports.renameFile = exports.downloadFile = exports.getFileContent = exports.listFiles = exports.deleteDatabase = exports.rotateDatabasePassword = exports.createDatabase = exports.listDatabases = exports.changePowerState = exports.sendCommand = exports.resourceUsage = exports.serverDetails = exports.deleteApiKey = exports.createApikey = exports.listApiKeys = exports.updatePassword = exports.updateEmail = exports.disableTwoFactor = exports.enableTwoFactor = exports.genaratetwoFactorQR = exports.accountDetails = exports.showPermissions = exports.listServers = void 0;
-exports.updateVariable = exports.listVariables = exports.deleteBackup = exports.downloadBackup = exports.backupDetails = void 0;
+exports.deleteUser = exports.updateUser = exports.userDetails = exports.createUser = exports.listUsers = exports.unassignAllocation = exports.setPrimaryAllocation = exports.setAllocationNote = exports.assignAllocation = exports.listAllocations = exports.deleteTask = exports.updateTask = exports.createTask = exports.deleteSchedule = exports.updateSchedule = exports.scheduleDetails = exports.createSchedule = exports.listSchedules = exports.uploadFile = exports.createFolder = exports.deleteFile = exports.decompressFile = exports.compressFile = exports.writeFile = exports.copyFile = exports.renameFile = exports.downloadFile = exports.getFileContent = exports.listFiles = exports.deleteDatabase = exports.rotateDatabasePassword = exports.createDatabase = exports.listDatabases = exports.changePowerState = exports.sendCommand = exports.resourceUsage = exports.serverDetails = exports.deleteApiKey = exports.createApikey = exports.listApiKeys = exports.updatePassword = exports.updateEmail = exports.disableTwoFactor = exports.enableTwoFactor = exports.genarateTwoFactorQR = exports.accountDetails = exports.showPermissions = exports.listServers = exports.test = exports.factory = void 0;
+exports.reinstallServer = exports.renameServer = exports.updateVariable = exports.listVariables = exports.deleteBackup = exports.downloadBackup = exports.backupDetails = exports.createBackup = exports.listBackups = void 0;
 const axiosRequest_1 = __importDefault(require("../utils/axiosRequest"));
 const utility_1 = require("../utils/utility");
+const factory = (method, route, data) => {
+    return (host, key) => {
+        const axios = new axiosRequest_1.default(host, key);
+        return axios.request(method, route, data);
+    };
+};
+exports.factory = factory;
+exports.test = exports.factory('GET', 'api/client', null);
 const listServers = (host, key) => {
     const axios = new axiosRequest_1.default(host, key);
     return axios.request('GET', 'api/client', null);
@@ -22,11 +30,11 @@ const accountDetails = (host, key) => {
     return axios.request('GET', 'api/client/account', null);
 };
 exports.accountDetails = accountDetails;
-const genaratetwoFactorQR = (host, key) => {
+const genarateTwoFactorQR = (host, key) => {
     const axios = new axiosRequest_1.default(host, key);
     return axios.request('GET', 'api/client/account/two-factor', null);
 };
-exports.genaratetwoFactorQR = genaratetwoFactorQR;
+exports.genarateTwoFactorQR = genarateTwoFactorQR;
 const enableTwoFactor = (host, key, twoFACode) => {
     const data = { code: twoFACode };
     const axios = new axiosRequest_1.default(host, key);
@@ -345,3 +353,14 @@ const updateVariable = (host, key, serverId, key2, value) => {
     return axios.request('PUT', `api/client/servers/${serverId}/startup/variable`, `${data}`);
 };
 exports.updateVariable = updateVariable;
+const renameServer = (host, key, serverId, name) => {
+    const axios = new axiosRequest_1.default(host, key);
+    const data = { name: name };
+    return axios.request('POST', `api/client/servers/${serverId}/settings/rename`, `${data}`);
+};
+exports.renameServer = renameServer;
+const reinstallServer = (host, key, serverId) => {
+    const axios = new axiosRequest_1.default(host, key);
+    return axios.request('POST', `api/client/servers/${serverId}/reinstall`, null);
+};
+exports.reinstallServer = reinstallServer;

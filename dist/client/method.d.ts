@@ -1,7 +1,9 @@
+export declare const factory: (method: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", route: string, data: string | null) => (host: string, key: string) => import("axios").AxiosPromise<any>;
+export declare const test: (host: string, key: string) => import("axios").AxiosPromise<any>;
 export declare const listServers: (host: string, key: string) => import("axios").AxiosPromise<any>;
 export declare const showPermissions: (host: string, key: string) => import("axios").AxiosPromise<any>;
 export declare const accountDetails: (host: string, key: string) => import("axios").AxiosPromise<any>;
-export declare const genaratetwoFactorQR: (host: string, key: string) => import("axios").AxiosPromise<any>;
+export declare const genarateTwoFactorQR: (host: string, key: string) => import("axios").AxiosPromise<any>;
 export declare const enableTwoFactor: (host: string, key: string, twoFACode: string) => import("axios").AxiosPromise<any>;
 export declare const disableTwoFactor: (host: string, key: string, password: string) => import("axios").AxiosPromise<any>;
 export declare const updateEmail: (host: string, key: string, newEmail: string, password: string) => import("axios").AxiosPromise<any>;
@@ -57,3 +59,5 @@ export declare const downloadBackup: (host: string, key: string, serverId: strin
 export declare const deleteBackup: (host: string, key: string, serverId: string, backupId: string) => import("axios").AxiosPromise<any>;
 export declare const listVariables: (host: string, key: string, serverId: string) => import("axios").AxiosPromise<any>;
 export declare const updateVariable: (host: string, key: string, serverId: string, key2: string, value: string) => import("axios").AxiosPromise<any>;
+export declare const renameServer: (host: string, key: string, serverId: string, name: string) => import("axios").AxiosPromise<any>;
+export declare const reinstallServer: (host: string, key: string, serverId: string) => import("axios").AxiosPromise<any>;
