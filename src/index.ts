@@ -1,11 +1,11 @@
-export default class Pterom {
-    packMode: 'CLIENT' | 'APP';
-    hostUrl: string;
-    apiKey: string;
+import Client from "./client";
+import App from "./app";
 
-    constructor(mode: 'CLIENT' | 'APP', host: string, key: string) {
-        this.hostUrl = host;
-        this.apiKey = key;
-        this.packMode = mode;
-    }
+export default class Ptero {
+    client: Client;
+    app: App;
+    constructor(host: string, key: string) {
+        this.client = new Client(host, key);
+        this.app = new App(host, key);
+      }
 }

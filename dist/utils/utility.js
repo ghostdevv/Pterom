@@ -1,6 +1,40 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.encode = exports.formatBytes = void 0;
+exports.encode = exports.formatBytes = exports.processError = void 0;
+function processError(e, callbacks) {
+    if (e.isAxiosError) {
+        const catchAllHandler = callbacks['*'];
+        const axiosError = e;
+        if (axiosError.response) {
+            const status = axiosError.response.status;
+            const errorCallback = callbacks[status];
+            if (errorCallback) {
+                return errorCallback(status);
+            }
+            else if (catchAllHandler) {
+                return catchAllHandler(status);
+            }
+            else {
+                return e;
+            }
+        }
+        else {
+            if (callbacks.NO_RESPONSE) {
+                return callbacks.NO_RESPONSE('NO_RESPONSE');
+            }
+            else if (catchAllHandler) {
+                return catchAllHandler('NO_RESPONSE');
+            }
+            else {
+                return e;
+            }
+        }
+    }
+    else {
+        return e;
+    }
+}
+exports.processError = processError;
 function formatBytes(bytes, decimals = 2) {
     if (bytes === 0)
         return '0 Bytes';

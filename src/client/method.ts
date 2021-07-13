@@ -1,6 +1,15 @@
 import Axios from '../utils/axiosRequest';
 import { encode } from '../utils/utility';
 
+export const factory = (method: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", route: string, data: string | null) => {
+    return (host: string, key: string) => {
+        const axios = new Axios(host, key);
+        return axios.request(method, route, data);
+    }
+}
+
+export const test = factory('GET', 'api/client', null)
+
 export const listServers = (host: string, key: string) => {
     const axios = new Axios(host, key);
     return axios.request('GET', 'api/client', null);
@@ -16,7 +25,7 @@ export const accountDetails = (host: string, key: string) => {
     return axios.request('GET', 'api/client/account', null);
 };
 
-export const genaratetwoFactorQR = (host: string, key: string) => {
+export const genarateTwoFactorQR = (host: string, key: string) => {
     const axios = new Axios(host, key);
     return axios.request('GET', 'api/client/account/two-factor', null);
 };
@@ -734,5 +743,33 @@ export const updateVariable = (
         'PUT',
         `api/client/servers/${serverId}/startup/variable`,
         `${data}`,
+    );
+};
+
+export const renameServer = (
+    host: string,
+    key: string,
+    serverId: string,
+    name: string,
+) => {
+    const axios = new Axios(host, key);
+    const data = { name: name };
+    return axios.request(
+        'POST',
+        `api/client/servers/${serverId}/settings/rename`,
+        `${data}`,
+    );
+};
+
+export const reinstallServer = (
+    host: string,
+    key: string,
+    serverId: string,
+) => {
+    const axios = new Axios(host, key);
+    return axios.request(
+        'POST',
+        `api/client/servers/${serverId}/reinstall`,
+        null,
     );
 };
