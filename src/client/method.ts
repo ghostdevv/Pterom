@@ -1,14 +1,18 @@
 import Axios from '../utils/axiosRequest';
 import { encode } from '../utils/utility';
 
-export const factory = (method: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", route: string, data: string | null) => {
+export const factory = (
+    method: 'GET' | 'PUT' | 'POST' | 'DELETE' | 'PATCH',
+    route: string,
+    data: string | null,
+) => {
     return (host: string, key: string) => {
         const axios = new Axios(host, key);
         return axios.request(method, route, data);
-    }
-}
+    };
+};
 
-export const test = factory('GET', 'api/client', null)
+export const test = factory('GET', 'api/client', null);
 
 export const listServers = (host: string, key: string) => {
     const axios = new Axios(host, key);
