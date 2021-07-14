@@ -15,7 +15,7 @@
         ".gitignore"
     ],
     "scripts": {
-        "test": "node dist/tests/app.test.js && node dist/tests/client.test.js",
+        "test": "",
         "build": "rimraf dist && tsc",
         "lint:check": "eslint . --ext .ts",
         "lint": "npm run lint:check -- --fix",
@@ -38,12 +38,12 @@
     },
     "devDependencies": {
         "@types/jest": "^26.0.24",
-        "@types/node": "^16.3.1",
+        "@types/node": "^16.3.2",
         "@typescript-eslint/eslint-plugin": "^4.28.3",
         "@typescript-eslint/parser": "^4.28.3",
         "eslint": "^7.30.0",
         "eslint-config-prettier": "^8.3.0",
-        "husky": "^7.0.0",
+        "husky": "^7.0.1",
         "jest": "^27.0.6",
         "lint-staged": "^11.0.1",
         "prettier": "^2.3.2",
