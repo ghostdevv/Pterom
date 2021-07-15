@@ -33,7 +33,8 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged -v"
+            "pre-commit": "lint-staged -v && build"
+            
         }
     },
     "devDependencies": {
