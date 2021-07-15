@@ -1,68 +1,29 @@
+import AxiosHandler from '../utils/axiosRequest';
 import { processError } from '../utils/utility';
-import * as method from './method';
 
 export default class Client {
-    hostUrl: string;
-    apiKey: string;
+    host: string;
+    Key: string;
+    axiosHandler: AxiosHandler;
 
     constructor(host: string, key: string) {
-        this.hostUrl = host;
-        this.apiKey = key;
+        this.host = host;
+        this.Key = key;
+        this.axiosHandler = new AxiosHandler(host, key);
     }
 
-    listServers() {
-        return new Promise((res, rej) => {
-            method
-                .listServers(this.hostUrl, this.apiKey)
-                .then((response) => {
-                    return res(response.data);
-                })
-                .catch((e) => rej(this.errorType(e)));
-        });
+    public async listServers(): Promise<any> {
+        return this.axiosHandler
+            .request('GET', 'api/client', null)
+            .then((res) => res.data)
+            .catch(this.errorType);
     }
 
-    showPermissions() {
-        return new Promise((res, rej) => {
-            method
-                .showPermissions(this.hostUrl, this.apiKey)
-                .then((response) => {
-                    return res(response.data);
-                })
-                .catch((e) => rej(this.errorType(e)));
-        });
-    }
-
-    accountDetails() {
-        return new Promise((res, rej) => {
-            method
-                .accountDetails(this.hostUrl, this.apiKey)
-                .then((response) => {
-                    return res(response.data);
-                })
-                .catch((e) => rej(this.errorType(e)));
-        });
-    }
-
-    genarateTwoFactorQR() {
-        return new Promise((res, rej) => {
-            method
-                .genarateTwoFactorQR(this.hostUrl, this.apiKey)
-                .then((response) => {
-                    return res(response.data);
-                })
-                .catch((e) => rej(this.errorType(e)));
-        });
-    }
-
-    enableTwoFactor(code: string) {
-        return new Promise((res, rej) => {
-            method
-                .enableTwoFactor(this.hostUrl, this.apiKey, code)
-                .then((response) => {
-                    return res(response.data);
-                })
-                .catch((e) => rej(this.errorType(e)));
-        });
+    public async showPermissions(): Promise<any> {
+        return this.axiosHandler
+            .request('GET', 'api/client/permissions', null)
+            .then((res) => res.data)
+            .catch(this.errorType);
     }
 
     private errorType(e: any) {

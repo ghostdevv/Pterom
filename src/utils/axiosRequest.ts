@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default class Axios {
+export default class AxiosHandler {
     host: string;
     key: string;
 
@@ -28,16 +28,16 @@ export default class Axios {
 
     public request(
         method: 'GET' | 'PUT' | 'POST' | 'DELETE' | 'PATCH',
-        cmdUrl: string,
+        route: string,
         data: string | null,
     ) {
-        const URL = this.trimUrl() + cmdUrl;
+        const URL = this.trimUrl() + route;
 
         return axios(URL, {
             headers: this.getHeaders(),
             maxRedirects: 5,
-            method: method,
-            data: data,
+            method,
+            data,
         });
     }
 }
