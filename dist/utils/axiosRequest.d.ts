@@ -1,8 +1,8 @@
-export default class Axios {
+export default class AxiosHandler {
     host: string;
     key: string;
     constructor(host: string, key: string);
     private getHeaders;
     private trimUrl;
-    request(method: 'GET' | 'PUT' | 'POST' | 'DELETE' | 'PATCH', cmdUrl: string, data: string | null): import("axios").AxiosPromise<any>;
+    request(method: 'GET' | 'PUT' | 'POST' | 'DELETE' | 'PATCH', route: string, data: string | null): import("axios").AxiosPromise<any>;
 }

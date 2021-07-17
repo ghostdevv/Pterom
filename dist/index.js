@@ -4,10 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = __importDefault(require("./client"));
+const app_1 = __importDefault(require("./app"));
 class Ptero {
     constructor(host, key) {
         this.client = new client_1.default(host, key);
-        this.app = new App(host, key);
+        this.app = new app_1.default(host, key);
     }
 }
 exports.default = Ptero;

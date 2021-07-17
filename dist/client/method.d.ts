@@ -1,5 +1,3 @@
-export declare const factory: (method: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", route: string, data: string | null) => (host: string, key: string) => import("axios").AxiosPromise<any>;
-export declare const test: (host: string, key: string) => import("axios").AxiosPromise<any>;
 export declare const listServers: (host: string, key: string) => import("axios").AxiosPromise<any>;
 export declare const showPermissions: (host: string, key: string) => import("axios").AxiosPromise<any>;
 export declare const accountDetails: (host: string, key: string) => import("axios").AxiosPromise<any>;

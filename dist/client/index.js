@@ -1,80 +1,71 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const axiosRequest_1 = __importDefault(require("../utils/axiosRequest"));
 const utility_1 = require("../utils/utility");
-const method = __importStar(require("./method"));
-class client {
+class Client {
     constructor(host, key) {
-        this.hostUrl = host;
-        this.apiKey = key;
+        this.host = host;
+        this.Key = key;
+        this.axiosHandler = new axiosRequest_1.default(host, key);
     }
-    listServers() {
-        return new Promise((res, rej) => {
-            method
-                .listServers(this.hostUrl, this.apiKey)
-                .then((response) => {
-                return res(response.data);
-            })
-                .catch((e) => rej(this.errorType(e)));
-        });
+    async listServers() {
+        return this.axiosHandler
+            .request('GET', 'api/client', null)
+            .then((res) => res.data)
+            .catch(this.errorType);
     }
-    showPermissions() {
-        return new Promise((res, rej) => {
-            method
-                .showPermissions(this.hostUrl, this.apiKey)
-                .then((response) => {
-                return res(response.data);
-            })
-                .catch((e) => rej(this.errorType(e)));
-        });
+    async showPermissions() {
+        return this.axiosHandler
+            .request('GET', 'api/client/permissions', null)
+            .then((res) => res.data)
+            .catch(this.errorType);
     }
-    accountDetails() {
-        return new Promise((res, rej) => {
-            method
-                .accountDetails(this.hostUrl, this.apiKey)
-                .then((response) => {
-                return res(response.data);
-            })
-                .catch((e) => rej(this.errorType(e)));
-        });
+    async accountDetails() {
+        return this.axiosHandler
+            .request('GET', 'api/client/account', null)
+            .then((res) => res.data)
+            .catch(this.errorType);
     }
-    genarateTwoFactorQR() {
-        return new Promise((res, rej) => {
-            method
-                .genarateTwoFactorQR(this.hostUrl, this.apiKey)
-                .then((response) => {
-                return res(response.data);
-            })
-                .catch((e) => rej(this.errorType(e)));
-        });
+    async genarateTwoFactorQR() {
+        return this.axiosHandler
+            .request('GET', 'api/client/account/two-factor', null)
+            .then((res) => res.data)
+            .catch(this.errorType);
     }
-    enableTwoFactor(code) {
-        return new Promise((res, rej) => {
-            method
-                .enableTwoFactor(this.hostUrl, this.apiKey, code)
-                .then((response) => {
-                return res(response.data);
-            })
-                .catch((e) => rej(this.errorType(e)));
-        });
+    async enableTwoFactor(code) {
+        const data = { code: code };
+        return this.axiosHandler
+            .request('POST', 'api/client/account/two-factor', `${data}`)
+            .then((res) => res.data.attributes)
+            .catch(this.errorType);
+    }
+    async disableTwoFactor(password) {
+        const data = { password: password };
+        return this.axiosHandler
+            .request('DELETE', 'api/client/account/two-factor', `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async updateEmail(newEmail, password) {
+        const data = { email: newEmail, password: password };
+        return this.axiosHandler
+            .request('PUT', 'api/client/account/email', `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async updatePassword(currentPassword, newPassword, confirmNewPassword) {
+        const data = {
+            current_password: currentPassword,
+            password: newPassword,
+            password_confirmation: confirmNewPassword,
+        };
+        return this.axiosHandler
+            .request('PUT', 'api/client/account/password', `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
     }
     errorType(e) {
         throw utility_1.processError(e, {
@@ -108,4 +99,4 @@ class client {
         });
     }
 }
-exports.default = client;
+exports.default = Client;

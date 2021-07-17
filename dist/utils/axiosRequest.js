@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
-class Axios {
+class AxiosHandler {
     constructor(host, key) {
         this.host = host;
         this.key = key;
@@ -23,14 +23,14 @@ class Axios {
         }
         return this.host;
     }
-    request(method, cmdUrl, data) {
-        const URL = this.trimUrl() + cmdUrl;
+    request(method, route, data) {
+        const URL = this.trimUrl() + route;
         return axios_1.default(URL, {
             headers: this.getHeaders(),
             maxRedirects: 5,
-            method: method,
-            data: data,
+            method,
+            data,
         });
     }
 }
-exports.default = Axios;
+exports.default = AxiosHandler;

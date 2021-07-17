@@ -1,6 +1,6 @@
 {
     "name": "pterom",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A open source API wrapper library for pterodactyl",
     "main": "dist/index.js",
     "repository": "https://github.com/Code-Sorcerers/Pterom.git",

@@ -1,5 +1,7 @@
-import client from "./client";
+import Client from './client';
+import App from './app';
 export default class Ptero {
-    client: client;
+    client: Client;
+    app: App;
     constructor(host: string, key: string);
 }

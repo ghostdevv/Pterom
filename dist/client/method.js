@@ -3,18 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.userDetails = exports.createUser = exports.listUsers = exports.unassignAllocation = exports.setPrimaryAllocation = exports.setAllocationNote = exports.assignAllocation = exports.listAllocations = exports.deleteTask = exports.updateTask = exports.createTask = exports.deleteSchedule = exports.updateSchedule = exports.scheduleDetails = exports.createSchedule = exports.listSchedules = exports.uploadFile = exports.createFolder = exports.deleteFile = exports.decompressFile = exports.compressFile = exports.writeFile = exports.copyFile = exports.renameFile = exports.downloadFile = exports.getFileContent = exports.listFiles = exports.deleteDatabase = exports.rotateDatabasePassword = exports.createDatabase = exports.listDatabases = exports.changePowerState = exports.sendCommand = exports.resourceUsage = exports.serverDetails = exports.deleteApiKey = exports.createApikey = exports.listApiKeys = exports.updatePassword = exports.updateEmail = exports.disableTwoFactor = exports.enableTwoFactor = exports.genarateTwoFactorQR = exports.accountDetails = exports.showPermissions = exports.listServers = exports.test = exports.factory = void 0;
-exports.reinstallServer = exports.renameServer = exports.updateVariable = exports.listVariables = exports.deleteBackup = exports.downloadBackup = exports.backupDetails = exports.createBackup = exports.listBackups = void 0;
+exports.createBackup = exports.listBackups = exports.deleteUser = exports.updateUser = exports.userDetails = exports.createUser = exports.listUsers = exports.unassignAllocation = exports.setPrimaryAllocation = exports.setAllocationNote = exports.assignAllocation = exports.listAllocations = exports.deleteTask = exports.updateTask = exports.createTask = exports.deleteSchedule = exports.updateSchedule = exports.scheduleDetails = exports.createSchedule = exports.listSchedules = exports.uploadFile = exports.createFolder = exports.deleteFile = exports.decompressFile = exports.compressFile = exports.writeFile = exports.copyFile = exports.renameFile = exports.downloadFile = exports.getFileContent = exports.listFiles = exports.deleteDatabase = exports.rotateDatabasePassword = exports.createDatabase = exports.listDatabases = exports.changePowerState = exports.sendCommand = exports.resourceUsage = exports.serverDetails = exports.deleteApiKey = exports.createApikey = exports.listApiKeys = exports.updatePassword = exports.updateEmail = exports.disableTwoFactor = exports.enableTwoFactor = exports.genarateTwoFactorQR = exports.accountDetails = exports.showPermissions = exports.listServers = void 0;
+exports.reinstallServer = exports.renameServer = exports.updateVariable = exports.listVariables = exports.deleteBackup = exports.downloadBackup = exports.backupDetails = void 0;
 const axiosRequest_1 = __importDefault(require("../utils/axiosRequest"));
 const utility_1 = require("../utils/utility");
-const factory = (method, route, data) => {
-    return (host, key) => {
-        const axios = new axiosRequest_1.default(host, key);
-        return axios.request(method, route, data);
-    };
-};
-exports.factory = factory;
-exports.test = exports.factory('GET', 'api/client', null);
 const listServers = (host, key) => {
     const axios = new axiosRequest_1.default(host, key);
     return axios.request('GET', 'api/client', null);
