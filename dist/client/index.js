@@ -67,6 +67,212 @@ class Client {
             .then((res) => res.data)
             .catch(this.errorType);
     }
+    async listApiKeys() {
+        return this.axiosHandler
+            .request('GET', 'api/client/account/api-keys', null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async createApiKey(description, ips) {
+        const data = { description: description, allowed_ips: ips };
+        return this.axiosHandler
+            .request('POST', 'api/client/account/api-keys', `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async deleteApiKey(identifier) {
+        return this.axiosHandler
+            .request('DELETE', `api/client/account/api-keys/${identifier}`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async serverDetails(serverId) {
+        return this.axiosHandler
+            .request('GET', `api/client/servers/${serverId}`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async resourceUsage(serverId) {
+        return this.axiosHandler
+            .request('GET', `api/client/servers/${serverId}/resources`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async sendCommand(serverId, command) {
+        const data = { command: command };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/command`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async changePowerState(serverId, state) {
+        const data = { signal: state };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/power`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async listDatabases(serverId) {
+        return this.axiosHandler
+            .request('GET', `api/client/servers/${serverId}/databases`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async createDatabase(serverId, newDatabaseName, remote) {
+        const data = { database: newDatabaseName, remote: remote };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/databases`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async rotateDatabasePassword(serverId, databaseId) {
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/databases/${databaseId}/rotate-password`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async deleteDatabase(serverId, databaseId) {
+        return this.axiosHandler
+            .request('DELETE', `api/client/servers/${serverId}/databases/${databaseId}`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async listFiles(serverId, dir) {
+        const folderDir = utility_1.encode(dir);
+        return this.axiosHandler
+            .request('GET', `api/client/servers/${serverId}/files/list?directory=${folderDir}`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async getFileContent(serverId, dir, file) {
+        const fileDir = utility_1.encode(dir, file);
+        return this.axiosHandler
+            .request('GET', `api/client/servers/${serverId}/files/contents?file=${fileDir}`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async downloadFile(serverId, dir, file) {
+        const fileDir = utility_1.encode(dir, file);
+        return this.axiosHandler
+            .request('GET', `api/client/servers/${serverId}/files/download?file=${fileDir}`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async renameFile(serverId, root, fileName, newFileName) {
+        const data = {
+            root: root,
+            files: [{ from: fileName, to: newFileName }],
+        };
+        return this.axiosHandler
+            .request('PUT', `api/client/servers/${serverId}/files/rename`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async copyFile(serverId, location) {
+        const data = { location: location };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/files/copy`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async writeFile(serverId, dir, file, rawData) {
+        const fileDir = utility_1.encode(dir, file);
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/files/write?file=${fileDir}`, `${rawData}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async compressFiles(serverId, root, fileName) {
+        const data = { root: root, files: fileName };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/files/compress`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async decompressFile(serverId, root, fileName) {
+        const data = { root: root, files: fileName };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/files/decompress`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async deleteFile(serverId, root, fileName) {
+        const data = { root: root, files: fileName };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/files/delete`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async createFolder(serverId, root, folderName) {
+        const data = { root: root, files: folderName };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/files/create-folder`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async uploadFolder(serverId) {
+        return this.axiosHandler
+            .request('GET', `api/client/servers/${serverId}/files/upload`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async listSchedules(serverId) {
+        return this.axiosHandler
+            .request('GET', `api/client/servers/${serverId}/schedules`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async createSchedules(serverId, name, minute, hour, dayOfWeek, dayOfMonth, active) {
+        const data = {
+            name: name,
+            minute: minute,
+            hour: hour,
+            day_of_month: dayOfMonth,
+            day_of_week: dayOfWeek,
+            is_active: active,
+        };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/schedules`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async scheduleDetails(serverId, scheduleId) {
+        return this.axiosHandler
+            .request('GET', `api/client/servers/${serverId}/schedules/${scheduleId}`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async updateSchedule(serverId, scheduleId, name, minute, hour, dayOfWeek, dayOfMonth, active) {
+        const data = {
+            name: name,
+            minute: minute,
+            hour: hour,
+            day_of_month: dayOfMonth,
+            day_of_week: dayOfWeek,
+            is_active: active,
+        };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/schedules/${scheduleId}`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async deleteSchedule(serverId, scheduleId) {
+        return this.axiosHandler
+            .request('DELETE', `api/client/servers/${serverId}/schedules/${scheduleId}`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async createTask(serverId, scheduleId, action, payload, timeOffSet) {
+        const data = {
+            action: action,
+            payload: payload,
+            time_offset: timeOffSet,
+        };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/schedules/${scheduleId}/tasks`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
     errorType(e) {
         throw utility_1.processError(e, {
             400: () => {
