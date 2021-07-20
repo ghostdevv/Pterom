@@ -475,6 +475,82 @@ export default class Client {
             .catch(this.errorType);
     }
 
+    public async updateTask(
+        serverId: string,
+        taskId: string,
+        scheduleId: string,
+        action: string,
+        payload: string,
+        timeOffSet: string,
+    ): Promise<any> {
+        const data = {
+            action: action,
+            payload: payload,
+            time_offset: timeOffSet,
+        };
+        return this.axiosHandler
+            .request(
+                'POST',
+                `api/client/servers/${serverId}/schedules/${scheduleId}/tasks/${taskId}`,
+                `${data}`,
+            )
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async deleteTask(
+        serverId: string,
+        scheduleId: string,
+        taskId: string,
+    ): Promise<any> {
+        return this.axiosHandler
+            .request(
+                'DELETE',
+                `api/client/servers/${serverId}/schedules/${scheduleId}/tasks/${taskId}`,
+                null,
+            )
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async listAllocations(serverId: string): Promise<any> {
+        return this.axiosHandler
+            .request(
+                'GET',
+                `api/client/servers/${serverId}/network/allocations`,
+                null,
+            )
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async assignAllocation(serverId: string): Promise<any> {
+        return this.axiosHandler
+            .request(
+                'POST',
+                `api/client/servers/${serverId}/network/allocations`,
+                null,
+            )
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async setAllocationNote(
+        serverId: string,
+        allocationId: string,
+        notes: string,
+    ): Promise<any> {
+        const data = { notes: notes };
+        return this.axiosHandler
+            .request(
+                'POST',
+                `api/client/servers/${serverId}/network/allocations/${allocationId}`,
+                `${data}`,
+            )
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
     private errorType(e: any) {
         throw processError(e, {
             400: () => {
