@@ -40,5 +40,10 @@ export default class Client {
     updateSchedule(serverId: string, scheduleId: string, name: string, minute: string, hour: string, dayOfWeek: string, dayOfMonth: string, active?: boolean): Promise<any>;
     deleteSchedule(serverId: string, scheduleId: string): Promise<any>;
     createTask(serverId: string, scheduleId: string, action: string, payload: string, timeOffSet: string): Promise<any>;
+    updateTask(serverId: string, taskId: string, scheduleId: string, action: string, payload: string, timeOffSet: string): Promise<any>;
+    deleteTask(serverId: string, scheduleId: string, taskId: string): Promise<any>;
+    listAllocations(serverId: string): Promise<any>;
+    assignAllocation(serverId: string): Promise<any>;
+    setAllocationNote(serverId: string, allocationId: string, notes: string): Promise<any>;
     private errorType;
 }

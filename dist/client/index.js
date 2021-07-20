@@ -3,6 +3,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/*
+    Copyright (C) 2021  Code-sorcerers <https://github.com/Code-Sorcerers>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
 const axiosRequest_1 = __importDefault(require("../utils/axiosRequest"));
 const utility_1 = require("../utils/utility");
 class Client {
@@ -92,6 +108,7 @@ class Client {
             .then((res) => res.data)
             .catch(this.errorType);
     }
+    //todo Websocket when implimented will go here. this is not a piority as it is not needed as much
     async resourceUsage(serverId) {
         return this.axiosHandler
             .request('GET', `api/client/servers/${serverId}/resources`, null)
@@ -270,6 +287,42 @@ class Client {
         };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/schedules/${scheduleId}/tasks`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async updateTask(serverId, taskId, scheduleId, action, payload, timeOffSet) {
+        const data = {
+            action: action,
+            payload: payload,
+            time_offset: timeOffSet,
+        };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/schedules/${scheduleId}/tasks/${taskId}`, `${data}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async deleteTask(serverId, scheduleId, taskId) {
+        return this.axiosHandler
+            .request('DELETE', `api/client/servers/${serverId}/schedules/${scheduleId}/tasks/${taskId}`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async listAllocations(serverId) {
+        return this.axiosHandler
+            .request('GET', `api/client/servers/${serverId}/network/allocations`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async assignAllocation(serverId) {
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/network/allocations`, null)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+    async setAllocationNote(serverId, allocationId, notes) {
+        const data = { notes: notes };
+        return this.axiosHandler
+            .request('POST', `api/client/servers/${serverId}/network/allocations/${allocationId}`, `${data}`)
             .then((res) => res.data)
             .catch(this.errorType);
     }
