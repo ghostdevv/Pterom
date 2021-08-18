@@ -1,6 +1,6 @@
 {
     "name": "pterom",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "A open source API wrapper library for pterodactyl",
     "main": "dist/index.js",
     "repository": "https://github.com/Code-Sorcerers/Pterom.git",
@@ -49,7 +49,6 @@
         "prettier": "^2.3.2",
         "rimraf": "^3.0.2",
         "ts-jest": "^27.0.3",
-        "typedoc": "^0.21.4",
         "typescript": "^4.3.5"
     },
     "dependencies": {

@@ -18,8 +18,9 @@ import Client from './client';
 import App from './app';
 
 export default class Pterom {
-    client: Client;
-    app: App;
+    public client: Client;
+    public app: App;
+
     constructor(host: string, key: string) {
         this.client = new Client(host, key);
         this.app = new App(host, key);
