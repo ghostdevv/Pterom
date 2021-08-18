@@ -3,10 +3,26 @@
     "version": "0.0.4",
     "description": "A open source API wrapper library for pterodactyl",
     "main": "dist/index.js",
-    "repository": "https://github.com/Code-Sorcerers/Pterom.git",
-    "author": "Code-sorcerers <https://github.com/Code-Sorcerers>",
-    "private": false,
     "license": "GPL-3.0",
+    "author": "Code-sorcerers <https://github.com/Code-Sorcerers>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Code-Sorcerers/Pterom.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Code-Sorcerers/Pterom/issues"
+    },
+    "keywords": [
+        "axios",
+        "nodejs",
+        "wrapper",
+        "rest-api",
+        "pterodactyl",
+        "user-friendly",
+        "wrapper-library",
+        "pterodactyl-panel",
+        "pterodactyl-panel-api"
+    ],
     "files": [
         "dist",
         "LICENSE",
