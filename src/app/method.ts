@@ -57,7 +57,7 @@ export const createUser = (
         first_name: first_name,
         last_name: last_name,
     };
-    return axios.request('POST', `api/application/users`, `${data}`);
+    return axios.request('POST', 'api/application/users', `${data}`);
 };
 
 export const updateUser = (

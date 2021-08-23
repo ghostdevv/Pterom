@@ -1,10 +1,10 @@
 {
     "name": "pterom",
     "version": "0.0.4",
-    "description": "A open source API wrapper library for pterodactyl",
-    "main": "dist/index.js",
     "license": "GPL-3.0",
+    "main": "dist/index.js",
     "author": "Code-sorcerers <https://github.com/Code-Sorcerers>",
+    "description": "A open source API wrapper library for pterodactyl",
     "repository": {
         "type": "git",
         "url": "https://github.com/Code-Sorcerers/Pterom.git"
@@ -27,8 +27,8 @@
         "dist",
         "LICENSE",
         "README.MD",
-        "CHANGELOG.MD",
-        ".gitignore"
+        ".gitignore",
+        "CHANGELOG.MD"
     ],
     "scripts": {
         "test": "",

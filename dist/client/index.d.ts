@@ -1,8 +1,5 @@
-import AxiosHandler from '../utils/axiosRequest';
 export default class Client {
-    host: string;
-    Key: string;
-    axiosHandler: AxiosHandler;
+    private axiosHandler;
     constructor(host: string, key: string);
     /**
      * Lists all servers

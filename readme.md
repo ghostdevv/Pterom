@@ -28,6 +28,7 @@ This library works by querying the Pterodactyl API V1 \(REST requests\) using a 
 ## 💻 Getting started with installation
 
 First install pterom with your package manager.
+
 ```bash
 npm i pterom
 or
@@ -50,9 +51,9 @@ const pt = new Pterom('YourHostHere', 'YourApiKeyHere');
 // Choose what class you want to use
 
 // For client
-pt.client
+pt.client;
 // For application
-pt.app
+pt.app;
 
 // You can then use the functions after choosing the class
 pt.client.listServers();
@@ -68,7 +69,6 @@ clientSide.client.listServers();
 // And away you go coding!
 // Any issues please just open a issue on github
 // And join the convo by clicking the discord button above
-
 ```
 
 ---

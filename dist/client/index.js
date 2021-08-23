@@ -23,8 +23,6 @@ const axiosRequest_1 = __importDefault(require("../utils/axiosRequest"));
 const utility_1 = require("../utils/utility");
 class Client {
     constructor(host, key) {
-        this.host = host;
-        this.Key = key;
         this.axiosHandler = new axiosRequest_1.default(host, key);
     }
     /**
@@ -144,7 +142,9 @@ class Client {
             .then((res) => res.data.attributes)
             .catch(this.errorType);
     }
-    //todo Websocket when implimented will go here. This is not a piority as it is not needed as much
+    /*
+        Websocket when implimented will go here. This is not a piority as it is not needed as much
+    */
     /**
      * Retrieves resource utilization of the specified server
      */

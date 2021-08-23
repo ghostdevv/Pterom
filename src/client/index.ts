@@ -18,13 +18,9 @@ import AxiosHandler from '../utils/axiosRequest';
 import { encode, processError } from '../utils/utility';
 
 export default class Client {
-    host: string;
-    Key: string;
-    axiosHandler: AxiosHandler;
+    private axiosHandler: AxiosHandler;
 
     constructor(host: string, key: string) {
-        this.host = host;
-        this.Key = key;
         this.axiosHandler = new AxiosHandler(host, key);
     }
 
@@ -164,9 +160,9 @@ export default class Client {
             .then((res) => res.data.attributes)
             .catch(this.errorType);
     }
-
-    //todo Websocket when implimented will go here. This is not a piority as it is not needed as much
-
+    /*
+        Websocket when implimented will go here. This is not a piority as it is not needed as much
+    */
     /**
      * Retrieves resource utilization of the specified server
      */
