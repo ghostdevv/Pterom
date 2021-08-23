@@ -1,3 +1,10 @@
+### **0.0.6** (2021-08-23)  
+  
+- fix readme.md for npm and publish  
+- Merge pull request #47 from Code-Sorcerers/dependabot/npm_and_yarn/types/node-16.7.0
+
+Bump @types/node from 16.6.1 to 16.7.0    
+  
 ### **0.0.5** (2021-08-23)  
   
 - publish latest  
