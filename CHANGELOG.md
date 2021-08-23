@@ -1,3 +1,22 @@
+### **0.0.5** (2021-08-23)  
+  
+- publish latest  
+- push latest  
+- add logo  
+- Add readme  
+- Add readme.md  
+- Update issue templates  
+- added keywords and a little tidy up  
+- Merge pull request #41 from Code-Sorcerers/dependabot/npm_and_yarn/typescript-eslint/eslint-plugin-4.29.2
+
+Bump @typescript-eslint/eslint-plugin from 4.29.1 to 4.29.2  
+- Merge pull request #42 from Code-Sorcerers/dependabot/npm_and_yarn/typescript-eslint/parser-4.29.2
+
+Bump @typescript-eslint/parser from 4.29.1 to 4.29.2  
+- Merge pull request #43 from Code-Sorcerers/dependabot/npm_and_yarn/ts-jest-27.0.5
+
+Bump ts-jest from 27.0.4 to 27.0.5    
+  
 ### **0.0.4** (2021-08-18)  
   
 - Major update for client and some fixes  
