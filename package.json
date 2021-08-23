@@ -1,6 +1,6 @@
 {
     "name": "pterom",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "license": "GPL-3.0",
     "main": "dist/index.js",
     "author": "Code-sorcerers <https://github.com/Code-Sorcerers>",

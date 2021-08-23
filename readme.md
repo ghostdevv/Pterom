@@ -2,7 +2,7 @@
 
 <p>
   <a>
-    <img href="" src="assets\Pterom.svg" height="auto">
+    <img href="" src="https://cdn.discordapp.com/attachments/754460402729091212/879178582281322516/Pterom.jpg" height="auto">
   </a>
 </p>
 
