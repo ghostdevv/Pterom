@@ -45,7 +45,7 @@ export default class AxiosHandler {
     public request(
         method: 'GET' | 'PUT' | 'POST' | 'DELETE' | 'PATCH',
         route: string,
-        data?: any,
+        data?: object | string,
     ) {
         const URL = this.trimUrl() + route;
 
