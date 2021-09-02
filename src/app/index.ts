@@ -26,21 +26,21 @@ export default class App {
 
     public async listServers() {
         return this.axiosHandler
-            .request('GET', 'api/application/users', null)
+            .request('GET', 'api/application/users')
             .then((res) => res.data)
             .catch(this.errorType);
     }
 
     public async userDetails(userId: string) {
         return this.axiosHandler
-            .request('GET', `api/application/users/${userId}`, null)
+            .request('GET', `api/application/users/${userId}`)
             .then((res) => res.data)
             .catch(this.errorType);
     }
 
     public async userDetailsExternalId(remoteId: string) {
         return this.axiosHandler
-            .request('GET', `api/application/users/external/${remoteId}`, null)
+            .request('GET', `api/application/users/external/${remoteId}`)
             .then((res) => res.data)
             .catch(this.errorType);
     }
@@ -58,7 +58,7 @@ export default class App {
             last_name: last_name,
         };
         return this.axiosHandler
-            .request('POST', 'api/application/users', `${data}`)
+            .request('POST', 'api/application/users', data)
             .then((res) => res.data)
             .catch(this.errorType);
     }
@@ -81,39 +81,35 @@ export default class App {
             password: password,
         };
         return this.axiosHandler
-            .request('PATCH', `api/application/users/${userId}`, `${data}`)
+            .request('PATCH', `api/application/users/${userId}`, data)
             .then((res) => res.data)
             .catch(this.errorType);
     }
 
     public async deleteUser(userId: string) {
         return this.axiosHandler
-            .request('DELETE', `api/application/users/${userId}`, null)
+            .request('DELETE', `api/application/users/${userId}`)
             .then((res) => res.data)
             .catch(this.errorType);
     }
 
     public async listNodes() {
         return this.axiosHandler
-            .request('GET', 'api/application/nodes', null)
+            .request('GET', 'api/application/nodes')
             .then((res) => res.data)
             .catch(this.errorType);
     }
 
     public async nodeDetails(nodeId: string) {
         return this.axiosHandler
-            .request('GET', `api/application/nodes/${nodeId}`, null)
+            .request('GET', `api/application/nodes/${nodeId}`)
             .then((res) => res.data)
             .catch(this.errorType);
     }
 
     public async nodeConfiguration(nodeId: string) {
         return this.axiosHandler
-            .request(
-                'GET',
-                `api/application/nodes/${nodeId}/configuration`,
-                null,
-            )
+            .request('GET', `api/application/nodes/${nodeId}/configuration`)
             .then((res) => res.data)
             .catch(this.errorType);
     }
@@ -145,7 +141,7 @@ export default class App {
             daemon_listen: daemon_listen,
         };
         return this.axiosHandler
-            .request('POST', 'api/application/nodes', `${data}`)
+            .request('POST', 'api/application/nodes', data)
             .then((res) => res.data)
             .catch(this.errorType);
     }
@@ -184,21 +180,105 @@ export default class App {
             daemon_listen: daemon_listen,
         };
         return this.axiosHandler
-            .request('PATCH', `api/application/nodes/${nodeId}`, `${data}`)
+            .request('PATCH', `api/application/nodes/${nodeId}`, data)
             .then((res) => res.data)
             .catch(this.errorType);
     }
 
     public async deleteNode(nodeId: string) {
         return this.axiosHandler
-            .request('DELETE', `api/application/nodes/${nodeId}`, null)
+            .request('DELETE', `api/application/nodes/${nodeId}`)
             .then((res) => res.data)
             .catch(this.errorType);
     }
 
     public async listAllocations(nodeId: string) {
         return this.axiosHandler
-            .request('GET', `api/application/nodes/${nodeId}/allocations`, null)
+            .request('GET', `api/application/nodes/${nodeId}/allocations`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async createAllocation(
+        nodeId: string,
+        ip: string,
+        ports: Array<string>,
+    ) {
+        const data = {
+            ip: ip,
+            ports: ports,
+        };
+        return this.axiosHandler
+            .request(
+                'POST',
+                `api/application/nodes/${nodeId}/allocations`,
+                data,
+            )
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async deleteAllocation(nodeId: string, allocationId: string) {
+        return this.axiosHandler
+            .request(
+                'DELETE',
+                `api/application/nodes/${nodeId}/allocations/${allocationId}`,
+            )
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async listLocations() {
+        return this.axiosHandler
+            .request('GET', `api/application/locations`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async locationDetails(locationId: string) {
+        return this.axiosHandler
+            .request('GET', `api/application/locations/${locationId}`)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async createLocation(short: string, long: string) {
+        const data = {
+            short: short,
+            long: long,
+        };
+        return this.axiosHandler
+            .request('POST', 'api/application/locations', data)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async updateLocation(
+        locationId: string,
+        short: string,
+        long: string,
+    ) {
+        const data = {
+            short: short,
+            long: long,
+        };
+        return this.axiosHandler
+            .request('PATCH', `api/application/locations/${locationId}`, data)
+            .then((res) => res.data)
+            .catch(this.errorType);
+    }
+
+    public async deleteLocation(
+        locationId: string,
+        short: string,
+        long: string,
+    ) {
+        const data = {
+            short: short,
+            long: long,
+        };
+        return this.axiosHandler
+            .request('DELETE', `api/application/locations/${locationId}`, data)
             .then((res) => res.data)
             .catch(this.errorType);
     }
