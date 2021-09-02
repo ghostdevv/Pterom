@@ -9,6 +9,7 @@
 [![GitHub Issues](https://img.shields.io/github/issues/Code-Sorcerers/Pterom.svg?style=for-the-badge)](https://github.com/Code-Sorcerers/Pterom/issues)
 ![Updated Badge](https://badges.pufler.dev/updated/Code-Sorcerers/Pterom?style=for-the-badge)
 ![Current Version](https://img.shields.io/github/v/release/Code-Sorcerers/Pterom?style=for-the-badge)
+![Bulid](https://img.shields.io/github/workflow/status/Code-Sorcerers/Pterom/Continuous%20integration%20&%20deployment?style=for-the-badge)
 [![Support Server](https://img.shields.io/discord/862036528934158356.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge)](https://discord.gg/kU25cFa9YR)
 
 ---
