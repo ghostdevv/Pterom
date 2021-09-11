@@ -1,6 +1,6 @@
 <div align="center">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p>
@@ -103,6 +103,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/cainthebest"><img src="https://avatars.githubusercontent.com/u/75994858?v=4?s=100" width="100px;" alt=""/><br /><sub><b>cainthebest</b></sub></a><br /><a href="https://github.com/Code-Sorcerers/Pterom/commits?author=cainthebest" title="Code">💻</a> <a href="https://github.com/Code-Sorcerers/Pterom/commits?author=cainthebest" title="Documentation">📖</a></td>
     <td align="center"><a href="https://npmjs.org/coloras"><img src="https://avatars.githubusercontent.com/u/67773205?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mister</b></sub></a><br /><a href="https://github.com/Code-Sorcerers/Pterom/commits?author=mister-coded" title="Code">💻</a> <a href="https://github.com/Code-Sorcerers/Pterom/commits?author=mister-coded" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://ghostdev.xyz"><img src="https://avatars.githubusercontent.com/u/47755378?v=4?s=100" width="100px;" alt=""/><br /><sub><b>GHOST</b></sub></a><br /><a href="https://github.com/Code-Sorcerers/Pterom/commits?author=ghostdevv" title="Code">💻</a></td>
   </tr>
 </table>
 
