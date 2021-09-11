@@ -14,6 +14,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "mister-coded",
+      "name": "mister",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67773205?v=4",
+      "profile": "https://npmjs.org/coloras",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
