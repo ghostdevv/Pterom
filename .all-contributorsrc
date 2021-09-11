@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "cainthebest",
+      "name": "cainthebest",
+      "avatar_url": "https://avatars.githubusercontent.com/u/75994858?v=4",
+      "profile": "https://github.com/cainthebest",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Pterom",
+  "projectOwner": "Code-Sorcerers",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
