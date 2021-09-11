@@ -19,29 +19,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-const axiosRequest_1 = __importDefault(require("../utils/axiosRequest"));
-const utility_1 = require("../utils/utility");
+const axiosHandler_1 = __importDefault(require("../utils/axiosHandler"));
+const errorHandler_1 = require("../utils/errorHandler");
 class App {
     constructor(host, key) {
-        this.axiosHandler = new axiosRequest_1.default(host, key);
+        this.axiosHandler = new axiosHandler_1.default(host, key);
     }
-    async listServers() {
+    async listUsers() {
         return this.axiosHandler
-            .request('GET', 'api/application/users', null)
+            .request('GET', 'api/application/users')
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
-    async userDetails(userId) {
+    // userdetails via id and external id together
+    async userDetails(id, useExternalId) {
         return this.axiosHandler
-            .request('GET', `api/application/users/${userId}`, null)
+            .request('GET', `api/application/users/${useExternalId ? `external/${id}` : `${id}`}`)
             .then((res) => res.data)
-            .catch(this.errorType);
-    }
-    async userDetailsExternalId(remoteId) {
-        return this.axiosHandler
-            .request('GET', `api/application/users/external/${remoteId}`, null)
-            .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
     async createUser(email, username, first_name, last_name) {
         const data = {
@@ -51,9 +46,9 @@ class App {
             last_name: last_name,
         };
         return this.axiosHandler
-            .request('POST', 'api/application/users', `${data}`)
+            .request('POST', 'api/application/users', data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
     async updateUser(userId, email, username, first_name, last_name, language, password) {
         const data = {
@@ -65,33 +60,33 @@ class App {
             password: password,
         };
         return this.axiosHandler
-            .request('PATCH', `api/application/users/${userId}`, `${data}`)
+            .request('PATCH', `api/application/users/${userId}`, data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
     async deleteUser(userId) {
         return this.axiosHandler
-            .request('DELETE', `api/application/users/${userId}`, null)
+            .request('DELETE', `api/application/users/${userId}`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
     async listNodes() {
         return this.axiosHandler
-            .request('GET', 'api/application/nodes', null)
+            .request('GET', 'api/application/nodes')
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
     async nodeDetails(nodeId) {
         return this.axiosHandler
-            .request('GET', `api/application/nodes/${nodeId}`, null)
+            .request('GET', `api/application/nodes/${nodeId}`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
     async nodeConfiguration(nodeId) {
         return this.axiosHandler
-            .request('GET', `api/application/nodes/${nodeId}/configuration`, null)
+            .request('GET', `api/application/nodes/${nodeId}/configuration`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
     async createNode(name, location_id, fqdn, scheme, memory, memory_overallocate, disk, disk_overallocate, upload_size, daemon_sftp, daemon_listen) {
         const data = {
@@ -108,9 +103,9 @@ class App {
             daemon_listen: daemon_listen,
         };
         return this.axiosHandler
-            .request('POST', 'api/application/nodes', `${data}`)
+            .request('POST', 'api/application/nodes', data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
     async updateNode(nodeId, name, description, location_id, fqdn, scheme, behind_proxy, maintenance_mode, memory, memory_overallocate, disk, disk_overallocate, upload_size, daemon_sftp, daemon_listen) {
         const data = {
@@ -130,55 +125,104 @@ class App {
             daemon_listen: daemon_listen,
         };
         return this.axiosHandler
-            .request('PATCH', `api/application/nodes/${nodeId}`, `${data}`)
+            .request('PATCH', `api/application/nodes/${nodeId}`, data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
     async deleteNode(nodeId) {
         return this.axiosHandler
-            .request('DELETE', `api/application/nodes/${nodeId}`, null)
+            .request('DELETE', `api/application/nodes/${nodeId}`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
     async listAllocations(nodeId) {
         return this.axiosHandler
-            .request('GET', `api/application/nodes/${nodeId}/allocations`, null)
+            .request('GET', `api/application/nodes/${nodeId}/allocations`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorHandler_1.errorType);
     }
-    errorType(e) {
-        throw utility_1.processError(e, {
-            400: () => {
-                return new Error('PTEROM APP HTTP ERROR (400): The request was invalid.');
-            },
-            401: () => {
-                return new Error('PTEROM APP HTTP ERROR (401): The request did not include an authentication token or the authentication token was expired.');
-            },
-            403: () => {
-                return new Error('PTEROM APP HTTP ERROR (403): The request was forbidden as it did not have permission to access the requested resource.');
-            },
-            404: () => {
-                return new Error('PTEROM APP HTTP ERROR (404): The requested resource was not found.');
-            },
-            409: () => {
-                return new Error('PTEROM APP HTTP ERROR (409): The request could not be completed due to a conflict.');
-            },
-            500: () => {
-                return new Error('PTEROM APP HTTP ERROR (500): The request was not completed due to an internal error on the server side.');
-            },
-            502: () => {
-                return new Error('PTEROM APP HTTP ERROR (502): The server is offline or bad gateway.');
-            },
-            503: () => {
-                return new Error('PTEROM APP HTTP ERROR (503): The server was unavailable.');
-            },
-            '*': () => {
-                return new Error('PTEROM APP HTTP ERROR (*): Unknown error occured.');
-            },
-            NO_RESPONSE: () => {
-                return new Error('PTEROM APP HTTP ERROR (-): The server did not respond.');
-            },
-        });
+    async createAllocation(nodeId, ip, ports) {
+        const data = {
+            ip: ip,
+            ports: ports,
+        };
+        return this.axiosHandler
+            .request('POST', `api/application/nodes/${nodeId}/allocations`, data)
+            .then((res) => res.data)
+            .catch(errorHandler_1.errorType);
+    }
+    async deleteAllocation(nodeId, allocationId) {
+        return this.axiosHandler
+            .request('DELETE', `api/application/nodes/${nodeId}/allocations/${allocationId}`)
+            .then((res) => res.data)
+            .catch(errorHandler_1.errorType);
+    }
+    async listLocations() {
+        return this.axiosHandler
+            .request('GET', `api/application/locations`)
+            .then((res) => res.data)
+            .catch(errorHandler_1.errorType);
+    }
+    async locationDetails(locationId) {
+        return this.axiosHandler
+            .request('GET', `api/application/locations/${locationId}`)
+            .then((res) => res.data)
+            .catch(errorHandler_1.errorType);
+    }
+    async createLocation(short, long) {
+        const data = {
+            short: short,
+            long: long,
+        };
+        return this.axiosHandler
+            .request('POST', 'api/application/locations', data)
+            .then((res) => res.data)
+            .catch(errorHandler_1.errorType);
+    }
+    async updateLocation(locationId, short, long) {
+        const data = {
+            short: short,
+            long: long,
+        };
+        return this.axiosHandler
+            .request('PATCH', `api/application/locations/${locationId}`, data)
+            .then((res) => res.data)
+            .catch(errorHandler_1.errorType);
+    }
+    async deleteLocation(locationId, short, long) {
+        const data = {
+            short: short,
+            long: long,
+        };
+        return this.axiosHandler
+            .request('DELETE', `api/application/locations/${locationId}`, data)
+            .then((res) => res.data)
+            .catch(errorHandler_1.errorType);
+    }
+    async listServers() {
+        return this.axiosHandler
+            .request('GET', `api/application/servers`)
+            .then((res) => res.data)
+            .catch(errorHandler_1.errorType);
+    }
+    // server detils via id and external id
+    async serverDetails(id, useExternalId) {
+        return this.axiosHandler
+            .request('GET', `api/application/servers/${useExternalId ? `external/${id}` : `${id}`}`)
+            .then((res) => res.data)
+            .catch(errorHandler_1.errorType);
+    }
+    async updateDetails(serverId, name, user, externalId, description) {
+        const data = {
+            name: name,
+            user: user,
+            external_id: externalId,
+            description: description,
+        };
+        return this.axiosHandler
+            .request('PATCH', `api/application/servers/${serverId}/details`, data)
+            .then((res) => res.data)
+            .catch(errorHandler_1.errorType);
     }
 }
 exports.default = App;

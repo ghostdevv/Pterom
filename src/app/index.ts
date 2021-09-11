@@ -14,8 +14,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-import AxiosHandler from '../utils/axiosRequest';
-import { processError } from '../utils/utility';
+import AxiosHandler from '../utils/axiosHandler';
+import { errorType } from '../utils/errorHandler';
 
 export default class App {
     private axiosHandler: AxiosHandler;
@@ -24,25 +24,27 @@ export default class App {
         this.axiosHandler = new AxiosHandler(host, key);
     }
 
-    public async listServers() {
+    public async listUsers(): Promise<object> {
         return this.axiosHandler
             .request('GET', 'api/application/users')
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
-    public async userDetails(userId: string) {
+    // userdetails via id and external id together
+    public async userDetails(
+        id: string,
+        useExternalId?: boolean,
+    ): Promise<object> {
         return this.axiosHandler
-            .request('GET', `api/application/users/${userId}`)
+            .request(
+                'GET',
+                `api/application/users/${
+                    useExternalId ? `external/${id}` : `${id}`
+                }`,
+            )
             .then((res) => res.data)
-            .catch(this.errorType);
-    }
-
-    public async userDetailsExternalId(remoteId: string) {
-        return this.axiosHandler
-            .request('GET', `api/application/users/external/${remoteId}`)
-            .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async createUser(
@@ -60,7 +62,7 @@ export default class App {
         return this.axiosHandler
             .request('POST', 'api/application/users', data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async updateUser(
@@ -83,35 +85,35 @@ export default class App {
         return this.axiosHandler
             .request('PATCH', `api/application/users/${userId}`, data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async deleteUser(userId: string) {
         return this.axiosHandler
             .request('DELETE', `api/application/users/${userId}`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async listNodes() {
         return this.axiosHandler
             .request('GET', 'api/application/nodes')
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async nodeDetails(nodeId: string) {
         return this.axiosHandler
             .request('GET', `api/application/nodes/${nodeId}`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async nodeConfiguration(nodeId: string) {
         return this.axiosHandler
             .request('GET', `api/application/nodes/${nodeId}/configuration`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async createNode(
@@ -143,7 +145,7 @@ export default class App {
         return this.axiosHandler
             .request('POST', 'api/application/nodes', data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async updateNode(
@@ -182,21 +184,21 @@ export default class App {
         return this.axiosHandler
             .request('PATCH', `api/application/nodes/${nodeId}`, data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async deleteNode(nodeId: string) {
         return this.axiosHandler
             .request('DELETE', `api/application/nodes/${nodeId}`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async listAllocations(nodeId: string) {
         return this.axiosHandler
             .request('GET', `api/application/nodes/${nodeId}/allocations`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async createAllocation(
@@ -215,7 +217,7 @@ export default class App {
                 data,
             )
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async deleteAllocation(nodeId: string, allocationId: string) {
@@ -225,21 +227,21 @@ export default class App {
                 `api/application/nodes/${nodeId}/allocations/${allocationId}`,
             )
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async listLocations() {
         return this.axiosHandler
             .request('GET', `api/application/locations`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async locationDetails(locationId: string) {
         return this.axiosHandler
             .request('GET', `api/application/locations/${locationId}`)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async createLocation(short: string, long: string) {
@@ -250,7 +252,7 @@ export default class App {
         return this.axiosHandler
             .request('POST', 'api/application/locations', data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async updateLocation(
@@ -265,7 +267,7 @@ export default class App {
         return this.axiosHandler
             .request('PATCH', `api/application/locations/${locationId}`, data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
     public async deleteLocation(
@@ -280,61 +282,49 @@ export default class App {
         return this.axiosHandler
             .request('DELETE', `api/application/locations/${locationId}`, data)
             .then((res) => res.data)
-            .catch(this.errorType);
+            .catch(errorType);
     }
 
-    private errorType(e: any) {
-        throw processError(e, {
-            400: () => {
-                return new Error(
-                    'PTEROM APP HTTP ERROR (400): The request was invalid.',
-                );
-            },
-            401: () => {
-                return new Error(
-                    'PTEROM APP HTTP ERROR (401): The request did not include an authentication token or the authentication token was expired.',
-                );
-            },
-            403: () => {
-                return new Error(
-                    'PTEROM APP HTTP ERROR (403): The request was forbidden as it did not have permission to access the requested resource.',
-                );
-            },
-            404: () => {
-                return new Error(
-                    'PTEROM APP HTTP ERROR (404): The requested resource was not found.',
-                );
-            },
-            409: () => {
-                return new Error(
-                    'PTEROM APP HTTP ERROR (409): The request could not be completed due to a conflict.',
-                );
-            },
-            500: () => {
-                return new Error(
-                    'PTEROM APP HTTP ERROR (500): The request was not completed due to an internal error on the server side.',
-                );
-            },
-            502: () => {
-                return new Error(
-                    'PTEROM APP HTTP ERROR (502): The server is offline or bad gateway.',
-                );
-            },
-            503: () => {
-                return new Error(
-                    'PTEROM APP HTTP ERROR (503): The server was unavailable.',
-                );
-            },
-            '*': () => {
-                return new Error(
-                    'PTEROM APP HTTP ERROR (*): Unknown error occured.',
-                );
-            },
-            NO_RESPONSE: () => {
-                return new Error(
-                    'PTEROM APP HTTP ERROR (-): The server did not respond.',
-                );
-            },
-        });
+    public async listServers() {
+        return this.axiosHandler
+            .request('GET', `api/application/servers`)
+            .then((res) => res.data)
+            .catch(errorType);
+    }
+
+    // server detils via id and external id
+    public async serverDetails(id: string, useExternalId?: boolean) {
+        return this.axiosHandler
+            .request(
+                'GET',
+                `api/application/servers/${
+                    useExternalId ? `external/${id}` : `${id}`
+                }`,
+            )
+            .then((res) => res.data)
+            .catch(errorType);
+    }
+
+    public async updateDetails(
+        serverId: string,
+        name: string,
+        user: string,
+        externalId?: string,
+        description?: string,
+    ) {
+        const data = {
+            name: name,
+            user: user,
+            external_id: externalId,
+            description: description,
+        };
+        return this.axiosHandler
+            .request(
+                'PATCH',
+                `api/application/servers/${serverId}/details`,
+                data,
+            )
+            .then((res) => res.data)
+            .catch(errorType);
     }
 }

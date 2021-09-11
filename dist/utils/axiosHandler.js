@@ -41,7 +41,7 @@ class AxiosHandler {
     }
     request(method, route, data) {
         const URL = this.trimUrl() + route;
-        return axios_1.default(URL, {
+        return (0, axios_1.default)(URL, {
             headers: this.getHeaders(),
             maxRedirects: 5,
             method,

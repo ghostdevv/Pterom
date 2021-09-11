@@ -4,5 +4,5 @@ export default class AxiosHandler {
     constructor(host: string, key: string);
     private getHeaders;
     private trimUrl;
-    request(method: 'GET' | 'PUT' | 'POST' | 'DELETE' | 'PATCH', route: string, data: string | null): import("axios").AxiosPromise<any>;
+    request(method: 'GET' | 'PUT' | 'POST' | 'DELETE' | 'PATCH', route: string, data?: object | string): import("axios").AxiosPromise<any>;
 }
