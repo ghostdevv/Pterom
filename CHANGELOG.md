@@ -119,5 +119,9 @@ Bump @types/node from 16.3.2 to 16.3.3
 - build and add new methods in index with res  
 - REVERT: scripts  
 - scripts  
-- update git files and CI    
+- update git files and CI   
+
+### **0.0.1** (2021-7-6)
+
+- Initial commit
   

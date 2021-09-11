@@ -341,29 +341,10 @@ export default class Client {
             .catch(errorType);
     }
 
-    /**
-     * Retrieves information about the specified server
-     * 
-    public async serverDetails(
-        serverId: string,
-        eggInfo?: boolean,
-        subusers?: boolean,
-    ): Promise<object> {
-        return this.axiosHandler
-            .request(
-                'GET',
-                `api/client/servers/${serverId}` + (eggInfo || subusers)
-                    ? `?include=${eggInfo ? 'egg' : ''}${
-                          eggInfo && subusers ? ',' : ''
-                      }${subusers ? 'subusers' : ''}`
-                    : '',
-            )
-            .then((res) => res.data.attributes)
-            .catch(errorType);
-    }
     /*
         Websocket when implimented will go here. This is not a piority as it is not needed as much
     */
+
     /**
      * Retrieves resource utilization of the specified server
      *
@@ -754,7 +735,7 @@ export default class Client {
      *
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
-     * .copyFile('SERVER_ID', 'STATE')
+     * .copyFile('SERVER_ID', 'LOCATION')
      * .then(() => {
      *      if (true) {
      *      return console.log('done');
@@ -775,6 +756,28 @@ export default class Client {
 
     /**
      * Writes data to the specified file
+     *
+     * @param {string} serverId ------
+     * @param {string} dir ------
+     * @param {string} rawData ------
+     *
+     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     *
+     * @example
+     * //ESM
+     * import Pterom from 'pterom';
+     * //CJS
+     * const Pterom = require('pterom')
+     *
+     * const pterom = new Pterom('HOST', 'API_KEY');
+     * pterom.client
+     * .writeFile('SERVER_ID', 'DIR', 'RAW_DATA')
+     * .then(() => {
+     *      if (true) {
+     *      return console.log('done');
+     *   }
+     * })
+     * .catch((e) => console.log(e));
      */
     public async writeFile(
         serverId: string,
@@ -794,6 +797,24 @@ export default class Client {
 
     /**
      * Compresses the specified file
+     *
+     * @param {string} serverId ------
+     * @param {string} root ------
+     * @param {Array<string>} fileName ------
+     *
+     * @returns {Promise<object>} Returns a object promise
+     *
+     * @example
+     * //ESM
+     * import Pterom from 'pterom';
+     * //CJS
+     * const Pterom = require('pterom')
+     *
+     * const pterom = new Pterom('HOST', 'API_KEY');
+     * pterom.client
+     * .compressFiles('SERVER_ID', 'ROOT', [FILE_NAME])
+     * .then(() => console.log(res))
+     * .catch((e) => console.log(e));
      */
     public async compressFiles(
         serverId: string,
@@ -813,6 +834,28 @@ export default class Client {
 
     /**
      * Decompresses the selected file
+     *
+     * @param {string} serverId ------
+     * @param {string} root ------
+     * @param {string} fileName ------
+     *
+     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     *
+     * @example
+     * //ESM
+     * import Pterom from 'pterom';
+     * //CJS
+     * const Pterom = require('pterom')
+     *
+     * const pterom = new Pterom('HOST', 'API_KEY');
+     * pterom.client
+     * .decompressFile('SERVER_ID', 'ROOT', 'FILE_NAME')
+     * .then(() => {
+     *      if (true) {
+     *      return console.log('done');
+     *   }
+     * })
+     * .catch((e) => console.log(e));
      */
     public async decompressFile(
         serverId: string,
@@ -832,6 +875,28 @@ export default class Client {
 
     /**
      * Deletes the specified file(s)
+     *
+     * @param {string} serverId ------
+     * @param {string} root ------
+     * @param {Array<string>} fileName ------
+     *
+     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     *
+     * @example
+     * //ESM
+     * import Pterom from 'pterom';
+     * //CJS
+     * const Pterom = require('pterom')
+     *
+     * const pterom = new Pterom('HOST', 'API_KEY');
+     * pterom.client
+     * .deleteFile('SERVER_ID', 'ROOT', [FILE_NAME])
+     * .then(() => {
+     *      if (true) {
+     *      return console.log('done');
+     *   }
+     * })
+     * .catch((e) => console.log(e));
      */
     public async deleteFile(
         serverId: string,
