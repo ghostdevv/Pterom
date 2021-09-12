@@ -115,18 +115,13 @@ Thanks goes to these wonderful people:
 
 |          Emoji/Type          |        Represents        |                                          Comments                                          |
 | :--------------------------: | :----------------------: | :----------------------------------------------------------------------------------------: |
-|      🔊 <br /> `audio`       |          Audio           |                        Podcasts, background music or sound effects                         |
-|      ♿️ <br /> `a11y`       |      Accessibility       |                        Reporting or working on accessibility issues                        |
 |       🐛 <br /> `bug`        |       Bug reports        |                    Links to issues reported by the user on this project                    |
-|       📝 <br /> `blog`       |        Blogposts         |                                   Links to the blogpost                                    |
-|     💼 <br /> `business`     |   Business Development   |                           People who execute on the business end                           |
 |       💻 <br /> `code`       |           Code           |                        Links to commits by the user on this project                        |
 |      🖋 <br /> `content`      |         Content          |                         e.g. website copy, blog posts are separate                         |
 |       🔣 <br /> `data`       |           Data           |            Links to contributed data for the project (both tests and datasets)             |
 |       📖 <br /> `doc`        |      Documentation       |    Links to commits by the user on this project, Wiki, or other source of documentation    |
 |      🎨 <br /> `design`      |          Design          |                      Links to the logo/iconography/visual design/etc.                      |
 |     💡 <br /> `example`      |         Examples         |                                   Links to the examples                                    |
-| 📋 <br /> `eventOrganizing`  |     Event Organizers     |                                    Links to event page                                     |
 |    💵 <br /> `financial`     |    Financial Support     |            People or orgs who provide financial support, links to relevant page            |
 |  🔍 <br /> `fundingFinding`  |  Funding/Grant Finders   |                           People who help find financial support                           |
 |      🤔 <br /> `ideas`       |     Ideas & Planning     |                                                                                            |
@@ -143,7 +138,6 @@ Thanks goes to these wonderful people:
 |       🔧 <br /> `tool`       |          Tools           |                                   Links to the repo home                                   |
 |       ⚠️ <br /> `test`       |          Tests           |                        Links to commits by the user on this project                        |
 |     ✅ <br /> `tutorial`     |        Tutorials         |                                   Links to the tutorial                                    |
-|       📢 <br /> `talk`       |          Talks           |                           Links to the slides/recording/repo/etc                           |
 |   📓 <br /> `userTesting`    |       User Testing       |                                  Links to user test notes                                  |
 
 </div>
