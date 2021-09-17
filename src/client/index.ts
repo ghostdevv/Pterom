@@ -14,6 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+import { AxiosResponse } from 'axios';
 import AxiosHandler from '../utils/axiosHandler';
 import { errorType } from '../utils/errorHandler';
 
@@ -162,7 +163,7 @@ export default class Client {
     /**
      * Disables TOTP 2FA on the account
      *
-     * @param {string} password -------------
+     * @param {string} password Password of the users account.
      *
      * @example
      * //ESM
@@ -173,28 +174,25 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .disableTwoFactor('ACCOUNT_PASSWORD')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
-    public async disableTwoFactor(password: string): Promise<boolean | void> {
+    public async disableTwoFactor(
+        password: string,
+    ): Promise<AxiosResponse | void> {
         const data = { password: password };
         return this.axiosHandler
             .request('DELETE', 'api/client/account/two-factor', data)
-            .then(() => true)
             .catch(errorType);
     }
 
     /**
      * Updates the email address of the account
      *
-     * @param {string} newEmail ------
-     * @param {string} password ------
+     * @param {string} newEmail New email that you wish to update the account with.
+     * @param {string} password Password of the users account.
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -205,28 +203,27 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .updateEmail('ACCOUNT_NEW_EMAIL', 'ACCOUNT_PASSWORD')
-     * .then((res) => console.log(res))
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     public async updateEmail(
         newEmail: string,
         password: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const data = { email: newEmail, password: password };
         return this.axiosHandler
             .request('PUT', 'api/client/account/email', data)
-            .then(() => true)
             .catch(errorType);
     }
 
     /**
      * Updates the password of the account
      *
-     * @param {string} currentPassword ------
-     * @param {string} newPassword ------
-     * @param {string} confirmNewPassword ------
+     * @param {string} currentPassword Current password of the users account.
+     * @param {string} newPassword New password that you wish to change to.
+     * @param {string} confirmNewPassword Confirm new password to insure it is correct.
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -237,14 +234,14 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .updatePassword('ACCOUNT_CURRENT_PASSWORD', 'ACCOUNT_NEW_PASSWORD', 'CONFIRM_ACCOUNT_NEW_PASSWORD')
-     * .then((res) => console.log(res))
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     public async updatePassword(
         currentPassword: string,
         newPassword: string,
         confirmNewPassword: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const data = {
             current_password: currentPassword,
             password: newPassword,
@@ -252,7 +249,6 @@ export default class Client {
         };
         return this.axiosHandler
             .request('PUT', 'api/client/account/password', data)
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -283,8 +279,8 @@ export default class Client {
     /**
      * Generates a new API key
      *
-     * @param {string} description ------
-     * @param {Array<string>} ips ------
+     * @param {string} description Description of the new API key.
+     * @param {Array<string>} ips Leave blank to allow any IP address to use this API key, otherwise provide each IP address.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -314,9 +310,9 @@ export default class Client {
     /**
      * Deletes the specified API key
      *
-     * @param {string} identifier ------
+     * @param {string} identifier The identifier of the API key. If you do not know the identifier you can find it via listApiKeys().
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -327,28 +323,23 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .deleteApiKey('API_KEY_IDENTIFIER')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
-    public async deleteApiKey(identifier: string): Promise<boolean | void> {
+    public async deleteApiKey(
+        identifier: string,
+    ): Promise<AxiosResponse | void> {
         return this.axiosHandler
             .request('DELETE', `api/client/account/api-keys/${identifier}`)
-            .then(() => true)
             .catch(errorType);
     }
-
     /*
         Websocket when implimented will go here. This is not a piority as it is not needed as much
     */
-
     /**
      * Retrieves resource utilization of the specified server
      *
-     * @param {string} serverId ------
+     * @param {string} serverId The id of the server.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -376,10 +367,10 @@ export default class Client {
      *
      * The server must be online to send a command to it. You will get HTTP 502 is the server if not online.
      *
-     * @param {string} serverId ------
-     * @param {string} command ------
+     * @param {string} serverId The id of the server.
+     * @param {string} command The command to wish to send.
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -390,31 +381,26 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .sendCommand('SERVER_ID', 'COMMAND')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     public async sendCommand(
         serverId: string,
         command: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const data = { command: command };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/command`, data)
-            .then(() => true)
             .catch(errorType);
     }
 
     /**
      * Sends a power signal to the server
      *
-     * @param {string} serverId ------
-     * @param {'start' | 'stop' | 'restart' | 'kill'} state ------
+     * @param {string} serverId The id of the server.
+     * @param {'start' | 'stop' | 'restart' | 'kill'} state The power state you wish to set on the server.
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -425,29 +411,24 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .changePowerState('SERVER_ID', 'STATE')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     public async changePowerState(
         serverId: string,
         state: 'start' | 'stop' | 'restart' | 'kill',
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const data = { signal: state };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/power`, data)
-            .then(() => true)
             .catch(errorType);
     }
 
     /**
      * Lists all databases on a server
      *
-     * @param {string} serverId ------
-     * @param {string} includePassword ------
+     * @param {string} serverId The id of the server.
+     * @param {boolean} [includePassword=false] Includes the database user password.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -465,7 +446,7 @@ export default class Client {
      */
     public async listDatabases(
         serverId: string,
-        includePassword?: string,
+        includePassword?: boolean,
     ): Promise<object> {
         return this.axiosHandler
             .request(
@@ -481,8 +462,8 @@ export default class Client {
     /**
      * Creates a new database
      *
-     * @param {string} serverId ------
-     * @param {string} newDatabaseName ------
+     * @param {string} serverId The id of the server.
+     * @param {string} newDatabaseName Name of the new database.
      * @param {string} remote -----
      *
      * @returns {Promise<object>} Returns a object promise
@@ -514,8 +495,8 @@ export default class Client {
     /**
      * Changes the password of a specified database
      *
-     * @param {string} serverId ------
-     * @param {string} databaseId ------
+     * @param {string} serverId The id of the server.
+     * @param {string} databaseId The id of the database.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -528,7 +509,7 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .rotateDatabasePassword('SERVER_ID', 'DATABASE_ID')
-     * .then(() => console.log(res))
+     * .then((res) => console.log(res))
      * .catch((e) => console.log(e));
      */
     public async rotateDatabasePassword(
@@ -547,10 +528,10 @@ export default class Client {
     /**
      * Deletes the specified database
      *
-     * @param {string} serverId ------
-     * @param {string} databaseId ------
+     * @param {string} serverId The id of the server.
+     * @param {string} databaseId The id of the database.
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -571,13 +552,12 @@ export default class Client {
     public async deleteDatabase(
         serverId: string,
         databaseId: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         return this.axiosHandler
             .request(
                 'DELETE',
                 `api/client/servers/${serverId}/databases/${databaseId}`,
             )
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -685,7 +665,7 @@ export default class Client {
      * @param {string} fileName ------
      * @param {string} newFileName ------
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -708,14 +688,13 @@ export default class Client {
         root: string,
         fileName: string,
         newFileName: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const data = {
             root: root,
             files: [{ from: fileName, to: newFileName }],
         };
         return this.axiosHandler
             .request('PUT', `api/client/servers/${serverId}/files/rename`, data)
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -725,7 +704,7 @@ export default class Client {
      * @param {string} serverId ------
      * @param {string} location ------
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -746,11 +725,10 @@ export default class Client {
     public async copyFile(
         serverId: string,
         location: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const data = { location: location };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/files/copy`, data)
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -761,7 +739,7 @@ export default class Client {
      * @param {string} dir ------
      * @param {string} rawData ------
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -783,7 +761,7 @@ export default class Client {
         serverId: string,
         dir: string,
         rawData: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const fileDir = encodeURIComponent(dir);
         return this.axiosHandler
             .request(
@@ -791,7 +769,6 @@ export default class Client {
                 `api/client/servers/${serverId}/files/write?file=${fileDir}`,
                 rawData,
             )
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -839,7 +816,7 @@ export default class Client {
      * @param {string} root ------
      * @param {string} fileName ------
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -861,7 +838,7 @@ export default class Client {
         serverId: string,
         root: string,
         fileName: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const data = { root: root, files: fileName };
         return this.axiosHandler
             .request(
@@ -869,7 +846,6 @@ export default class Client {
                 `api/client/servers/${serverId}/files/decompress`,
                 data,
             )
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -880,7 +856,7 @@ export default class Client {
      * @param {string} root ------
      * @param {Array<string>} fileName ------
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -902,7 +878,7 @@ export default class Client {
         serverId: string,
         root: string,
         fileName: Array<string>,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const data = { root: root, files: fileName };
         return this.axiosHandler
             .request(
@@ -910,7 +886,6 @@ export default class Client {
                 `api/client/servers/${serverId}/files/delete`,
                 data,
             )
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -921,7 +896,7 @@ export default class Client {
         serverId: string,
         root: string,
         folderName: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const data = { root: root, files: folderName };
         return this.axiosHandler
             .request(
@@ -929,7 +904,6 @@ export default class Client {
                 `api/client/servers/${serverId}/files/create-folder`,
                 data,
             )
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -1034,13 +1008,12 @@ export default class Client {
     public async deleteSchedule(
         serverId: string,
         scheduleId: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         return this.axiosHandler
             .request(
                 'DELETE',
                 `api/client/servers/${serverId}/schedules/${scheduleId}`,
             )
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -1102,13 +1075,12 @@ export default class Client {
         serverId: string,
         scheduleId: string,
         taskId: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         return this.axiosHandler
             .request(
                 'DELETE',
                 `api/client/servers/${serverId}/schedules/${scheduleId}/tasks/${taskId}`,
             )
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -1179,13 +1151,12 @@ export default class Client {
     public async unassignAllocation(
         serverId: string,
         allocationId: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         return this.axiosHandler
             .request(
                 'DELETE',
                 `api/client/servers/${serverId}/network/allocations/${allocationId}`,
             )
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -1255,10 +1226,9 @@ export default class Client {
     public async deleteUser(
         serverId: string,
         userId: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         return this.axiosHandler
             .request('DELETE', `api/client/servers/${serverId}/users/${userId}`)
-            .then(() => true)
             .catch(errorType);
     }
 
@@ -1320,17 +1290,13 @@ export default class Client {
     public async deleteBackup(
         serverId: string,
         backupId: string,
-    ): Promise<boolean> {
+    ): Promise<AxiosResponse | void> {
         return this.axiosHandler
             .request(
                 'DELETE',
                 `api/client/servers/${serverId}/backups/${backupId}`,
             )
-            .then(() => true)
-            .catch((e) => {
-                errorType(e);
-                return false;
-            });
+            .catch(errorType);
     }
 
     /**
@@ -1368,7 +1334,7 @@ export default class Client {
     public async renameServer(
         serverId: string,
         name: string,
-    ): Promise<boolean | void> {
+    ): Promise<AxiosResponse | void> {
         const data = { name: name };
         return this.axiosHandler
             .request(
@@ -1376,17 +1342,17 @@ export default class Client {
                 `api/client/servers/${serverId}/settings/rename`,
                 data,
             )
-            .then(() => true)
             .catch(errorType);
     }
 
     /**
      * Reinstall the specified server
      */
-    public async reinstallServer(serverId: string): Promise<boolean | void> {
+    public async reinstallServer(
+        serverId: string,
+    ): Promise<AxiosResponse | void> {
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/reinstall`)
-            .then(() => true)
             .catch(errorType);
     }
 }
