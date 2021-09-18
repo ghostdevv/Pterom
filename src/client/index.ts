@@ -542,11 +542,7 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .deleteDatabase('SERVER_ID', 'DATABASE_ID')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done');
      * .catch((e) => console.log(e));
      */
     public async deleteDatabase(
@@ -564,8 +560,8 @@ export default class Client {
     /**
      * Lists all files within a folder
      *
-     * @param {string} serverId ------
-     * @param {string} dir ------
+     * @param {string} serverId The id of the server.
+     * @param {string} dir The dir of the folder.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -578,7 +574,7 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .listFiles('SERVER_ID', 'DIR')
-     * .then(() => console.log(res))
+     * .then((res) => console.log(res))
      * .catch((e) => console.log(e));
      */
     public async listFiles(serverId: string, dir: string): Promise<object> {
@@ -595,8 +591,8 @@ export default class Client {
     /**
      * Displays the contents of the specified file
      *
-     * @param {string} serverId ------
-     * @param {string} dir ------
+     * @param {string} serverId The id of the server.
+     * @param {string} dir The dir of the file.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -609,7 +605,7 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .getFileContent('SERVER_ID', 'DIR')
-     * .then(() => console.log(res))
+     * .then((res) => console.log(res))
      * .catch((e) => console.log(e));
      */
     public async getFileContent(
@@ -629,8 +625,8 @@ export default class Client {
     /**
      * Generates a one-time link to download the specified file
      *
-     * @param {string} serverId ------
-     * @param {string} dir ------
+     * @param {string} serverId The id of the server.
+     * @param {string} dir The dir of the file.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -643,7 +639,7 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .downloadFile('SERVER_ID', 'DIR')
-     * .then(() => console.log(res))
+     * .then((res) => console.log(res))
      * .catch((e) => console.log(e));
      */
     public async downloadFile(serverId: string, dir: string): Promise<object> {
@@ -676,11 +672,7 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .renameFile('SERVER_ID', 'ROOT', 'FILE_NAME', 'NEW_FILE_NAME')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done')
      * .catch((e) => console.log(e));
      */
     public async renameFile(

@@ -3,22 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/*
-    Copyright (C) 2021  Code-sorcerers <https://github.com/Code-Sorcerers>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
 const axiosHandler_1 = __importDefault(require("../utils/axiosHandler"));
 const errorHandler_1 = require("../utils/errorHandler");
 class Client {
@@ -149,7 +133,7 @@ class Client {
     /**
      * Disables TOTP 2FA on the account
      *
-     * @param {string} password -------------
+     * @param {string} password Password of the users account.
      *
      * @example
      * //ESM
@@ -160,27 +144,22 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .disableTwoFactor('ACCOUNT_PASSWORD')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     async disableTwoFactor(password) {
         const data = { password: password };
         return this.axiosHandler
             .request('DELETE', 'api/client/account/two-factor', data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
      * Updates the email address of the account
      *
-     * @param {string} newEmail ------
-     * @param {string} password ------
+     * @param {string} newEmail New email that you wish to update the account with.
+     * @param {string} password Password of the users account.
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -191,24 +170,23 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .updateEmail('ACCOUNT_NEW_EMAIL', 'ACCOUNT_PASSWORD')
-     * .then((res) => console.log(res))
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     async updateEmail(newEmail, password) {
         const data = { email: newEmail, password: password };
         return this.axiosHandler
             .request('PUT', 'api/client/account/email', data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
      * Updates the password of the account
      *
-     * @param {string} currentPassword ------
-     * @param {string} newPassword ------
-     * @param {string} confirmNewPassword ------
+     * @param {string} currentPassword Current password of the users account.
+     * @param {string} newPassword New password that you wish to change to.
+     * @param {string} confirmNewPassword Confirm new password to insure it is correct.
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -219,7 +197,7 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .updatePassword('ACCOUNT_CURRENT_PASSWORD', 'ACCOUNT_NEW_PASSWORD', 'CONFIRM_ACCOUNT_NEW_PASSWORD')
-     * .then((res) => console.log(res))
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     async updatePassword(currentPassword, newPassword, confirmNewPassword) {
@@ -230,7 +208,6 @@ class Client {
         };
         return this.axiosHandler
             .request('PUT', 'api/client/account/password', data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
@@ -259,8 +236,8 @@ class Client {
     /**
      * Generates a new API key
      *
-     * @param {string} description ------
-     * @param {Array<string>} ips ------
+     * @param {string} description Description of the new API key.
+     * @param {Array<string>} ips Leave blank to allow any IP address to use this API key, otherwise provide each IP address.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -286,9 +263,9 @@ class Client {
     /**
      * Deletes the specified API key
      *
-     * @param {string} identifier ------
+     * @param {string} identifier The identifier of the API key. If you do not know the identifier you can find it via listApiKeys().
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -299,38 +276,13 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .deleteApiKey('API_KEY_IDENTIFIER')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     async deleteApiKey(identifier) {
         return this.axiosHandler
             .request('DELETE', `api/client/account/api-keys/${identifier}`)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
-    }
-    /**
-     * Retrieves information about the specified server
-     *
-    public async serverDetails(
-        serverId: string,
-        eggInfo?: boolean,
-        subusers?: boolean,
-    ): Promise<object> {
-        return this.axiosHandler
-            .request(
-                'GET',
-                `api/client/servers/${serverId}` + (eggInfo || subusers)
-                    ? `?include=${eggInfo ? 'egg' : ''}${
-                          eggInfo && subusers ? ',' : ''
-                      }${subusers ? 'subusers' : ''}`
-                    : '',
-            )
-            .then((res) => res.data.attributes)
-            .catch(errorType);
     }
     /*
         Websocket when implimented will go here. This is not a piority as it is not needed as much
@@ -338,7 +290,7 @@ class Client {
     /**
      * Retrieves resource utilization of the specified server
      *
-     * @param {string} serverId ------
+     * @param {string} serverId The id of the server.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -365,10 +317,10 @@ class Client {
      *
      * The server must be online to send a command to it. You will get HTTP 502 is the server if not online.
      *
-     * @param {string} serverId ------
-     * @param {string} command ------
+     * @param {string} serverId The id of the server.
+     * @param {string} command The command to wish to send.
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -379,27 +331,22 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .sendCommand('SERVER_ID', 'COMMAND')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     async sendCommand(serverId, command) {
         const data = { command: command };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/command`, data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
      * Sends a power signal to the server
      *
-     * @param {string} serverId ------
-     * @param {'start' | 'stop' | 'restart' | 'kill'} state ------
+     * @param {string} serverId The id of the server.
+     * @param {'start' | 'stop' | 'restart' | 'kill'} state The power state you wish to set on the server.
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -410,25 +357,20 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .changePowerState('SERVER_ID', 'STATE')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     async changePowerState(serverId, state) {
         const data = { signal: state };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/power`, data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
      * Lists all databases on a server
      *
-     * @param {string} serverId ------
-     * @param {string} includePassword ------
+     * @param {string} serverId The id of the server.
+     * @param {boolean} [includePassword=false] Includes the database user password.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -455,8 +397,8 @@ class Client {
     /**
      * Creates a new database
      *
-     * @param {string} serverId ------
-     * @param {string} newDatabaseName ------
+     * @param {string} serverId The id of the server.
+     * @param {string} newDatabaseName Name of the new database.
      * @param {string} remote -----
      *
      * @returns {Promise<object>} Returns a object promise
@@ -483,8 +425,8 @@ class Client {
     /**
      * Changes the password of a specified database
      *
-     * @param {string} serverId ------
-     * @param {string} databaseId ------
+     * @param {string} serverId The id of the server.
+     * @param {string} databaseId The id of the database.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -497,7 +439,7 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .rotateDatabasePassword('SERVER_ID', 'DATABASE_ID')
-     * .then(() => console.log(res))
+     * .then((res) => console.log(res))
      * .catch((e) => console.log(e));
      */
     async rotateDatabasePassword(serverId, databaseId) {
@@ -509,10 +451,10 @@ class Client {
     /**
      * Deletes the specified database
      *
-     * @param {string} serverId ------
-     * @param {string} databaseId ------
+     * @param {string} serverId The id of the server.
+     * @param {string} databaseId The id of the database.
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -523,24 +465,19 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .deleteDatabase('SERVER_ID', 'DATABASE_ID')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done');
      * .catch((e) => console.log(e));
      */
     async deleteDatabase(serverId, databaseId) {
         return this.axiosHandler
             .request('DELETE', `api/client/servers/${serverId}/databases/${databaseId}`)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
      * Lists all files within a folder
      *
-     * @param {string} serverId ------
-     * @param {string} dir ------
+     * @param {string} serverId The id of the server.
+     * @param {string} dir The dir of the folder.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -553,7 +490,7 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .listFiles('SERVER_ID', 'DIR')
-     * .then(() => console.log(res))
+     * .then((res) => console.log(res))
      * .catch((e) => console.log(e));
      */
     async listFiles(serverId, dir) {
@@ -566,8 +503,8 @@ class Client {
     /**
      * Displays the contents of the specified file
      *
-     * @param {string} serverId ------
-     * @param {string} dir ------
+     * @param {string} serverId The id of the server.
+     * @param {string} dir The dir of the file.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -580,7 +517,7 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .getFileContent('SERVER_ID', 'DIR')
-     * .then(() => console.log(res))
+     * .then((res) => console.log(res))
      * .catch((e) => console.log(e));
      */
     async getFileContent(serverId, dir) {
@@ -593,8 +530,8 @@ class Client {
     /**
      * Generates a one-time link to download the specified file
      *
-     * @param {string} serverId ------
-     * @param {string} dir ------
+     * @param {string} serverId The id of the server.
+     * @param {string} dir The dir of the file.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -607,7 +544,7 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .downloadFile('SERVER_ID', 'DIR')
-     * .then(() => console.log(res))
+     * .then((res) => console.log(res))
      * .catch((e) => console.log(e));
      */
     async downloadFile(serverId, dir) {
@@ -625,7 +562,7 @@ class Client {
      * @param {string} fileName ------
      * @param {string} newFileName ------
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -636,11 +573,7 @@ class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .renameFile('SERVER_ID', 'ROOT', 'FILE_NAME', 'NEW_FILE_NAME')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done')
      * .catch((e) => console.log(e));
      */
     async renameFile(serverId, root, fileName, newFileName) {
@@ -650,7 +583,6 @@ class Client {
         };
         return this.axiosHandler
             .request('PUT', `api/client/servers/${serverId}/files/rename`, data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
@@ -659,7 +591,7 @@ class Client {
      * @param {string} serverId ------
      * @param {string} location ------
      *
-     * @returns {Promise<boolean | void>} Returns either a boolean or void promise
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
      * @example
      * //ESM
@@ -669,7 +601,7 @@ class Client {
      *
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
-     * .copyFile('SERVER_ID', 'STATE')
+     * .copyFile('SERVER_ID', 'LOCATION')
      * .then(() => {
      *      if (true) {
      *      return console.log('done');
@@ -681,21 +613,59 @@ class Client {
         const data = { location: location };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/files/copy`, data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
      * Writes data to the specified file
+     *
+     * @param {string} serverId ------
+     * @param {string} dir ------
+     * @param {string} rawData ------
+     *
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
+     *
+     * @example
+     * //ESM
+     * import Pterom from 'pterom';
+     * //CJS
+     * const Pterom = require('pterom')
+     *
+     * const pterom = new Pterom('HOST', 'API_KEY');
+     * pterom.client
+     * .writeFile('SERVER_ID', 'DIR', 'RAW_DATA')
+     * .then(() => {
+     *      if (true) {
+     *      return console.log('done');
+     *   }
+     * })
+     * .catch((e) => console.log(e));
      */
     async writeFile(serverId, dir, rawData) {
         const fileDir = encodeURIComponent(dir);
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/files/write?file=${fileDir}`, rawData)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
      * Compresses the specified file
+     *
+     * @param {string} serverId ------
+     * @param {string} root ------
+     * @param {Array<string>} fileName ------
+     *
+     * @returns {Promise<object>} Returns a object promise
+     *
+     * @example
+     * //ESM
+     * import Pterom from 'pterom';
+     * //CJS
+     * const Pterom = require('pterom')
+     *
+     * const pterom = new Pterom('HOST', 'API_KEY');
+     * pterom.client
+     * .compressFiles('SERVER_ID', 'ROOT', [FILE_NAME])
+     * .then(() => console.log(res))
+     * .catch((e) => console.log(e));
      */
     async compressFiles(serverId, root, fileName) {
         const data = { root: root, files: fileName };
@@ -706,22 +676,64 @@ class Client {
     }
     /**
      * Decompresses the selected file
+     *
+     * @param {string} serverId ------
+     * @param {string} root ------
+     * @param {string} fileName ------
+     *
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
+     *
+     * @example
+     * //ESM
+     * import Pterom from 'pterom';
+     * //CJS
+     * const Pterom = require('pterom')
+     *
+     * const pterom = new Pterom('HOST', 'API_KEY');
+     * pterom.client
+     * .decompressFile('SERVER_ID', 'ROOT', 'FILE_NAME')
+     * .then(() => {
+     *      if (true) {
+     *      return console.log('done');
+     *   }
+     * })
+     * .catch((e) => console.log(e));
      */
     async decompressFile(serverId, root, fileName) {
         const data = { root: root, files: fileName };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/files/decompress`, data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
      * Deletes the specified file(s)
+     *
+     * @param {string} serverId ------
+     * @param {string} root ------
+     * @param {Array<string>} fileName ------
+     *
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
+     *
+     * @example
+     * //ESM
+     * import Pterom from 'pterom';
+     * //CJS
+     * const Pterom = require('pterom')
+     *
+     * const pterom = new Pterom('HOST', 'API_KEY');
+     * pterom.client
+     * .deleteFile('SERVER_ID', 'ROOT', [FILE_NAME])
+     * .then(() => {
+     *      if (true) {
+     *      return console.log('done');
+     *   }
+     * })
+     * .catch((e) => console.log(e));
      */
     async deleteFile(serverId, root, fileName) {
         const data = { root: root, files: fileName };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/files/delete`, data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
@@ -731,7 +743,6 @@ class Client {
         const data = { root: root, files: folderName };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/files/create-folder`, data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
@@ -803,7 +814,6 @@ class Client {
     async deleteSchedule(serverId, scheduleId) {
         return this.axiosHandler
             .request('DELETE', `api/client/servers/${serverId}/schedules/${scheduleId}`)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
@@ -840,7 +850,6 @@ class Client {
     async deleteTask(serverId, scheduleId, taskId) {
         return this.axiosHandler
             .request('DELETE', `api/client/servers/${serverId}/schedules/${scheduleId}/tasks/${taskId}`)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
@@ -886,7 +895,6 @@ class Client {
     async unassignAllocation(serverId, allocationId) {
         return this.axiosHandler
             .request('DELETE', `api/client/servers/${serverId}/network/allocations/${allocationId}`)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
@@ -936,7 +944,6 @@ class Client {
     async deleteUser(serverId, userId) {
         return this.axiosHandler
             .request('DELETE', `api/client/servers/${serverId}/users/${userId}`)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
@@ -981,11 +988,7 @@ class Client {
     async deleteBackup(serverId, backupId) {
         return this.axiosHandler
             .request('DELETE', `api/client/servers/${serverId}/backups/${backupId}`)
-            .then(() => true)
-            .catch((e) => {
-            (0, errorHandler_1.errorType)(e);
-            return false;
-        });
+            .catch(errorHandler_1.errorType);
     }
     /**
      * Lists all variables on the server
@@ -1013,7 +1016,6 @@ class Client {
         const data = { name: name };
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/settings/rename`, data)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
     /**
@@ -1022,7 +1024,6 @@ class Client {
     async reinstallServer(serverId) {
         return this.axiosHandler
             .request('POST', `api/client/servers/${serverId}/reinstall`)
-            .then(() => true)
             .catch(errorHandler_1.errorType);
     }
 }

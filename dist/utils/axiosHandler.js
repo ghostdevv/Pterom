@@ -33,11 +33,7 @@ class AxiosHandler {
         };
     }
     trimUrl() {
-        const lastChar = this.host.charAt(this.host.length - 1);
-        if (lastChar !== '/') {
-            this.host = this.host + '/';
-        }
-        return this.host;
+        return this.host.endsWith('/') ? this.host.slice(0, -1) : this.host;
     }
     request(method, route, data) {
         const URL = this.trimUrl() + route;
