@@ -1,0 +1,14 @@
+
+# Theme
+remote_theme: pmarsceill/just-the-docs
+color_scheme: "light"
+
+# Aux link in top right of page
+aux_links:
+  "Pterom on GitHub":
+    - "https://github.com/Code-Sorcerers/Pterom"
+# Aux link will open a new tab
+aux_links_new_tab: true
+
+# footer
+footer_content: "Copyright &copy; 2021 Code-sorcerers. Distributed under <a href=\"https://github.com/Code-Sorcerers/Pterom/blob/main/LICENSE\">GPL 3.0 license.</a>"
