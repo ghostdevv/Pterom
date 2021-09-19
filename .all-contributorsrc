@@ -42,6 +42,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "CodingLikeASnake",
+      "name": "Lynx White",
+      "avatar_url": "https://avatars.githubusercontent.com/u/78212081?v=4",
+      "profile": "https://github.com/CodingLikeASnake",
+      "contributions": [
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
