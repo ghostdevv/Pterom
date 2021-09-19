@@ -464,7 +464,7 @@ export default class Client {
      *
      * @param {string} serverId The id of the server.
      * @param {string} newDatabaseName Name of the new database.
-     * @param {string} remote -----
+     * @param {string} remote
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -656,10 +656,10 @@ export default class Client {
     /**
      * Renames the specified file
      *
-     * @param {string} serverId ------
-     * @param {string} root ------
-     * @param {string} fileName ------
-     * @param {string} newFileName ------
+     * @param {string} serverId The id of the server.
+     * @param {string} root The folder the file is in.
+     * @param {string} fileName Current file name.
+     * @param {string} newFileName New file name.
      *
      * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
@@ -693,8 +693,8 @@ export default class Client {
     /**
      * Copies the specified file
      *
-     * @param {string} serverId ------
-     * @param {string} location ------
+     * @param {string} serverId The id of the server.
+     * @param {string} location Path to file.
      *
      * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
@@ -707,11 +707,7 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .copyFile('SERVER_ID', 'LOCATION')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done')
      * .catch((e) => console.log(e));
      */
     public async copyFile(
@@ -727,9 +723,9 @@ export default class Client {
     /**
      * Writes data to the specified file
      *
-     * @param {string} serverId ------
-     * @param {string} dir ------
-     * @param {string} rawData ------
+     * @param {string} serverId The id of the server.
+     * @param {string} dir Dir of file plus file name.
+     * @param {string} rawData The raw data you wish to write to the file.
      *
      * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
@@ -742,11 +738,7 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .writeFile('SERVER_ID', 'DIR', 'RAW_DATA')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => return console.log('done')
      * .catch((e) => console.log(e));
      */
     public async writeFile(
@@ -767,9 +759,9 @@ export default class Client {
     /**
      * Compresses the specified file
      *
-     * @param {string} serverId ------
-     * @param {string} root ------
-     * @param {Array<string>} fileName ------
+     * @param {string} serverId The id of the server.
+     * @param {string} root The path to folder the file is in.
+     * @param {Array<string>} fileName The file name.
      *
      * @returns {Promise<object>} Returns a object promise
      *
@@ -782,7 +774,7 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .compressFiles('SERVER_ID', 'ROOT', [FILE_NAME])
-     * .then(() => console.log(res))
+     * .then((res) => console.log(res))
      * .catch((e) => console.log(e));
      */
     public async compressFiles(
@@ -804,9 +796,9 @@ export default class Client {
     /**
      * Decompresses the selected file
      *
-     * @param {string} serverId ------
-     * @param {string} root ------
-     * @param {string} fileName ------
+     * @param {string} serverId The id of the server.
+     * @param {string} root The path to the folder the file is in.
+     * @param {string} fileName The file name.
      *
      * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
@@ -819,11 +811,7 @@ export default class Client {
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
      * .decompressFile('SERVER_ID', 'ROOT', 'FILE_NAME')
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     public async decompressFile(
@@ -844,9 +832,9 @@ export default class Client {
     /**
      * Deletes the specified file(s)
      *
-     * @param {string} serverId ------
-     * @param {string} root ------
-     * @param {Array<string>} fileName ------
+     * @param {string} serverId The id of the server.
+     * @param {string} root The path to the folder the file is in.
+     * @param {Array<string>} fileName File name.
      *
      * @returns {Promise<AxiosResponse | void>} Returns a promise.
      *
@@ -858,12 +846,8 @@ export default class Client {
      *
      * const pterom = new Pterom('HOST', 'API_KEY');
      * pterom.client
-     * .deleteFile('SERVER_ID', 'ROOT', [FILE_NAME])
-     * .then(() => {
-     *      if (true) {
-     *      return console.log('done');
-     *   }
-     * })
+     * .deleteFile('SERVER_ID', 'ROOT', ['FILE_NAME'])
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     public async deleteFile(
@@ -883,6 +867,24 @@ export default class Client {
 
     /**
      * Creates the specified folder in the specified directory
+     *
+     * @param serverId The id of the server.
+     * @param root The folder that you wish to create a folder within.
+     * @param folderName Folder name.
+     *
+     * @returns {Promise<AxiosResponse | void>} Returns a promise.
+     *
+     * @example
+     * //ESM
+     * import Pterom from 'pterom';
+     * //CJS
+     * const Pterom = require('pterom')
+     *
+     * const pterom = new Pterom('HOST', 'API_KEY');
+     * pterom.client
+     * .createFolder('SERVER_ID', 'ROOT', 'FOLDER_NAME')
+     * .then(() => console.log('done'))
+     * .catch((e) => console.log(e));
      */
     public async createFolder(
         serverId: string,
