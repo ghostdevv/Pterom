@@ -1865,3 +1865,4 @@ export default class Client {
             .request('POST', `api/client/servers/${serverId}/reinstall`)
             .catch(errorType);
     }
+}
