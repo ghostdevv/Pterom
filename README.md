@@ -16,7 +16,7 @@
 
 ## 📌 What am I?
 
-Pterom is a open source API wrapper for Pterodactyl that is built with TypeScript. It will support the Application & Client side of the API. Currenty it is a work in progress.
+Pterom is a open source API wrapper for Pterodactyl that is built with TypeScript. It will support the Application & Client side of the API. Currenty it is a work in progress but client side seems stable.
 
 ---
 
@@ -28,55 +28,62 @@ This library works by querying the Pterodactyl API V1 \(REST requests\) using a 
 
 ## 💻 Getting started with installation
 
-First install pterom with your package manager.
+### First install pterom with your package manager.
 
 ```bash
 npm i pterom
-or
+OR
 yarn add pterom
 ```
 
-```ts
-// Import it
+### Then import it into your file.
 
+```ts
 // ESM
 import Pterom from 'pterom';
 
 // CJS
 const Pterom = require('pterom');
+```
 
-// Create a new instance
-// Remember that client and app sides have diffrent API keys
-const pt = new Pterom('YourHostHere', 'YourApiKeyHere');
+### Create a new instance of pterom with options.
 
-// Choose what class you want to use
+### The host option is required.
 
+### The clientKey & appKey are optinal but one must be used.
+
+```ts
+const pt = new Pterom({
+    host: 'HOST',
+    clientKey: 'CLIENT_API_KEY',
+    appKey: 'APP_API_KEY',
+});
+```
+
+### Choose what class you want to use.
+
+```ts
 // For client
 pt.client;
 // For application
 pt.app;
+```
 
-// You can then use the functions after choosing the class
-pt.client.listServers();
-pt.app.listServers();
+### You can then use the functions after choosing the class.
 
-// To use app and client in the same file there needs to be 2 instances to separate them
-const appSide = new Pterom('appHost', 'appApiKey');
-const clientSide = new Pterom('clientHost', 'clientApiKey');
+### All functions are promised based so they must have a .then after like below.
 
-appSide.app.listServers();
-clientSide.client.listServers();
+```ts
+pt.client.listServers().then((res) => console.log(res));
 
-// And away you go coding!
-// Any issues please just open a issue on github
-// And join the convo by clicking the discord button above
+pt.app.listServers().then((res) => console.log(res));
 ```
 
 ---
 
 ## 📖 Documentation (coming soon)
 
-The full documentation will be started on once there is a stable version. But JSDocs will be included within the code.
+The full documentation has been started but is not yet done. But JSDocs will be included within the code.
 
 ---
 
