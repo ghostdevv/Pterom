@@ -20,7 +20,7 @@ import { errorType } from '../utils/errorHandler';
 export default class App {
     private axiosHandler: AxiosHandler;
 
-    constructor(host: string, key: string) {
+    constructor(host: string, key?: string) {
         this.axiosHandler = new AxiosHandler(host, key);
     }
 

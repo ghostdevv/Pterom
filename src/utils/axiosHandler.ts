@@ -18,9 +18,9 @@ import axios from 'axios';
 
 export default class AxiosHandler {
     host: string;
-    key: string;
+    key?: string;
 
-    constructor(host: string, key: string) {
+    constructor(host: string, key?: string) {
         this.host = host;
         this.key = key;
     }
