@@ -14,15 +14,35 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-import Client from './client';
-import App from './app';
+import Client from './client/index';
+import App from './app/index';
+
+interface PteromOptions {
+    host: string;
+    clientKey?: string;
+    appKey?: string;
+}
 
 export default class Pterom {
-    public client: Client;
-    public app: App;
+    client: Client;
+    app: App;
+    constructor(options: PteromOptions) {
+        const { host, clientKey, appKey } = options;
 
-    constructor(host: string, key: string) {
-        this.client = new Client(host, key);
-        this.app = new App(host, key);
+        if (!host || typeof host != 'string')
+            throw new TypeError(
+                `Expected host option to be a string, recieved ${typeof host}`,
+            );
+
+        if (clientKey && typeof clientKey != 'string')
+            throw new TypeError('clientKey option should be a string');
+        if (appKey && typeof appKey != 'string')
+            throw new TypeError('appKey option should be a string');
+
+        if (!appKey && !clientKey)
+            throw new Error('One of appKey or clientKey is required');
+
+        this.app = new App(host, appKey);
+        this.client = new Client(host, clientKey);
     }
 }

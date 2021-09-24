@@ -1,6 +1,6 @@
 export default class App {
     private axiosHandler;
-    constructor(host: string, key: string);
+    constructor(host: string, key?: string);
     listUsers(): Promise<object>;
     userDetails(id: string, useExternalId?: boolean): Promise<object>;
     createUser(email: string, username: string, first_name: string, last_name: string): Promise<any>;

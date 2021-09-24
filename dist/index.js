@@ -19,12 +19,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-const client_1 = __importDefault(require("./client"));
-const app_1 = __importDefault(require("./app"));
+const index_1 = __importDefault(require("./client/index"));
+const index_2 = __importDefault(require("./app/index"));
 class Pterom {
-    constructor(host, key) {
-        this.client = new client_1.default(host, key);
-        this.app = new app_1.default(host, key);
+    constructor(options) {
+        const { host, clientKey, appKey } = options;
+        if (!host || typeof host != 'string')
+            throw new TypeError(`Expected host option to be a string, recieved ${typeof host}`);
+        if (clientKey && typeof clientKey != 'string')
+            throw new TypeError('clientKey option should be a string');
+        if (appKey && typeof appKey != 'string')
+            throw new TypeError('appKey option should be a string');
+        if (!appKey && !clientKey)
+            throw new Error('One of appKey or clientKey is required');
+        this.app = new index_2.default(host, appKey);
+        this.client = new index_1.default(host, clientKey);
     }
 }
 exports.default = Pterom;

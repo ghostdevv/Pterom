@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 export default class Client {
     private axiosHandler;
-    constructor(host: string, key: string);
+    constructor(host: string, key?: string);
     /**
      * Lists all servers
      *
@@ -16,7 +16,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listServers()
      * .then((res) => console.log(res))
@@ -34,7 +37,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .showPermissions()
      * .then((res) => console.log(res))
@@ -52,7 +58,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'7
+     * });
      * pterom.client
      * .accountDetails()
      * .then((res) => console.log(res))
@@ -70,7 +79,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .genarateTwoFactorQR()
      * .then((res) => console.log(res))
@@ -88,7 +100,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .enableTwoFactor('CODE_FROM_genarateTwoFactorQR()')
      * .then((res) => console.log(res))
@@ -106,7 +121,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .disableTwoFactor('ACCOUNT_PASSWORD')
      * .then(() => console.log('done'))
@@ -127,7 +145,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .updateEmail('ACCOUNT_NEW_EMAIL', 'ACCOUNT_PASSWORD')
      * .then(() => console.log('done'))
@@ -149,7 +170,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .updatePassword('ACCOUNT_CURRENT_PASSWORD', 'ACCOUNT_NEW_PASSWORD', 'CONFIRM_ACCOUNT_NEW_PASSWORD')
      * .then(() => console.log('done'))
@@ -167,7 +191,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listApiKeys()
      * .then((res) => console.log(res))
@@ -188,7 +215,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .createApiKey('API_KEY_DESCRIPTION', [API_KEY_IPS])
      * .then((res) => console.log(res))
@@ -208,7 +238,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .deleteApiKey('API_KEY_IDENTIFIER')
      * .then(() => console.log('done'))
@@ -228,7 +261,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .resourceUsage('SERVER_ID')
      * .then((res) => console.log(res))
@@ -251,7 +287,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .sendCommand('SERVER_ID', 'COMMAND')
      * .then(() => console.log('done'))
@@ -272,7 +311,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .changePowerState('SERVER_ID', 'STATE')
      * .then(() => console.log('done'))
@@ -293,7 +335,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listDatabases('SERVER_ID', 'INCLUDE_PASSWORD')
      * .then((res) => console.log(res))
@@ -315,7 +360,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .createDatabase('SERVER_ID', 'NEW_DATABASE_NAME', 'REMOTE')
      * .then((res) => console.log(res))
@@ -336,7 +384,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .rotateDatabasePassword('SERVER_ID', 'DATABASE_ID')
      * .then((res) => console.log(res))
@@ -357,7 +408,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .deleteDatabase('SERVER_ID', 'DATABASE_ID')
      * .then(() => console.log('done');
@@ -378,7 +432,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listFiles('SERVER_ID', 'DIR')
      * .then((res) => console.log(res))
@@ -399,7 +456,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .getFileContent('SERVER_ID', 'DIR')
      * .then((res) => console.log(res))
@@ -420,7 +480,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .downloadFile('SERVER_ID', 'DIR')
      * .then((res) => console.log(res))
@@ -443,7 +506,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .renameFile('SERVER_ID', 'ROOT', 'FILE_NAME', 'NEW_FILE_NAME')
      * .then(() => console.log('done')
@@ -464,7 +530,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .copyFile('SERVER_ID', 'LOCATION')
      * .then(() => console.log('done')
@@ -486,7 +555,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .writeFile('SERVER_ID', 'DIR', 'RAW_DATA')
      * .then(() => return console.log('done')
@@ -508,7 +580,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .compressFiles('SERVER_ID', 'ROOT', [FILE_NAME])
      * .then((res) => console.log(res))
@@ -530,7 +605,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .decompressFile('SERVER_ID', 'ROOT', 'FILE_NAME')
      * .then(() => console.log('done'))
@@ -552,7 +630,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .deleteFile('SERVER_ID', 'ROOT', ['FILE_NAME'])
      * .then(() => console.log('done'))
@@ -574,7 +655,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .createFolder('SERVER_ID', 'ROOT', 'FOLDER_NAME')
      * .then(() => console.log('done'))
@@ -596,7 +680,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .uploadFolder('SERVER_ID')
      * .then((res) => console.log(res))
@@ -616,7 +703,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listSchedules('SERVER_ID')
      * .then((res) => console.log(res))
@@ -642,7 +732,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listSchedules(
      * 'SERVER_ID',
@@ -670,7 +763,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .scheduleDetails('SERVER_ID', 'SCHEDULE_ID')
      * .then((res) => console.log(res))
@@ -697,7 +793,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .updateSchedule(
      * 'SERVER_ID',
@@ -726,7 +825,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .deleteSchedule('SERVER_ID', 'SCHEDULE_ID')
      * .then(() => console.log('done'))
@@ -750,7 +852,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .createTask(
      * 'SERVER_ID',
@@ -781,7 +886,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .updayteTask(
      * 'SERVER_ID',
@@ -809,7 +917,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listAllocations('SERVER_ID')
      * .then(() => console.log('done'))
@@ -829,7 +940,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listAllocations('SERVER_ID')
      * .then((res) => console.log(res))
@@ -849,7 +963,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .assignAllocation('SERVER_ID')
      * .then((res) => console.log(res))
@@ -871,7 +988,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .setAllocationNote('SERVER_ID')
      * .then((res) => console.log(res))
@@ -892,7 +1012,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .setPrimaryAllocation('SERVER_ID')
      * .then((res) => console.log(res))
@@ -913,7 +1036,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .unassignAllocation('SERVER_ID')
      * .then(() => console.log('done'))
@@ -933,7 +1059,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listUsers('SERVER_ID')
      * .then((res) => console.log(res))
@@ -955,7 +1084,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .createUser('SERVER_ID', 'EMAIL', 'PERMISSIONS')
      * .then((res) => console.log(res))
@@ -976,7 +1108,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .userDetails('SERVER_ID', 'USER_ID')
      * .then((res) => console.log(res))
@@ -997,10 +1132,13 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .updateUser('SERVER_ID', 'USER_ID')
-     * .then((res) => console.log(res))
+     * .then((res) => console.log('res'))
      * .catch((e) => console.log(e));
      */
     updateUser(serverId: string, userId: string, permissions: string): Promise<object>;
@@ -1018,7 +1156,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .deleteUser('SERVER_ID', 'USER_ID')
      * .then(() => console.log('done'))
@@ -1038,7 +1179,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listBackups('SERVER_ID')
      * .then((res) => console.log(res))
@@ -1058,10 +1202,13 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .createBackup('SERVER_ID')
-     * .then((res) => console.log(res))
+     * .then(() => console.log('done'))
      * .catch((e) => console.log(e));
      */
     createBackup(serverId: string): Promise<object>;
@@ -1079,7 +1226,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .backupDetails('SERVER_ID', 'BACKUP_ID')
      * .then((res) => console.log(res))
@@ -1100,7 +1250,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .deleteBackup('SERVER_ID', 'BACKUP_ID')
      * .then((res) => console.log(res))
@@ -1121,7 +1274,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .deleteBackup('SERVER_ID', 'BACKUP_ID')
      * .then(() => console.log('done'))
@@ -1141,7 +1297,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .listVariable('SERVER_ID', 'KEY', 'VALUE')
      * .then((res) => console.log(res))
@@ -1163,7 +1322,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .updateVariable('SERVER_ID', 'KEY', 'VALUE')
      * .then((res) => console.log(res))
@@ -1184,7 +1346,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .renameServer('SERVER_ID', 'NAME')
      * .then(() => console.log('done'))
@@ -1204,7 +1369,10 @@ export default class Client {
      * //CJS
      * const Pterom = require('pterom')
      *
-     * const pterom = new Pterom('HOST', 'CLIENT_API_KEY');
+     * const pterom = new Pterom({
+     * host: 'HOST',
+     * clientKey: 'CLIENT_API_KEY'
+     * });
      * pterom.client
      * .reinstallServer('SERVER_ID')
      * .then(() => console.log('done'))
